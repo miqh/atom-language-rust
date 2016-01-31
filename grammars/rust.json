@@ -1,0 +1,633 @@
+{
+  "fileTypes": ["rs"],
+  "name": "Rust",
+  "scopeName": "source.rust",
+  "repository": {
+    "attributes": {
+      "patterns": [
+        {
+          "name": "meta.attribute.inner.rust",
+          "begin": "^\\s*#\\s*!\\s*\\[",
+          "end": "\\]"
+        },
+        {
+          "name": "meta.attribute.outer.rust",
+          "begin": "^\\s*#\\s*\\[",
+          "end": "\\]"
+        }
+      ]
+    },
+    "bindings": {
+      "name": "keyword.other.binding.rust",
+      "match": "\\b(?:let|ref|mut|const|static)\\b"
+    },
+    "booleans": {
+      "name": "constant.language.boolean.rust",
+      "match": "\\b(?:true|false)\\b"
+    },
+    "casts": {
+      "name": "keyword.other.cast.rust",
+      "match": "\\bas\\b"
+    },
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.rust",
+          "match": "(?<!/)//(?![/!]).*"
+        },
+        {
+          "name": "comment.line.doc.inner.rust",
+          "match": "//!\\s*(.*)",
+          "captures": {
+            "1": {
+              "name": "meta.doc.rust",
+              "patterns": [
+                {
+                  "include": "#markdown"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "comment.line.doc.outer.rust",
+          "match": "///\\s*(.*)",
+          "captures": {
+            "1": {
+              "name": "meta.doc.rust",
+              "patterns": [
+                {
+                  "include": "#markdown"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "comment.block.rust",
+          "begin": "/\\*(?![\\*!])",
+          "end": "\\*/"
+        },
+        {
+          "name": "comment.block.doc.inner.rust",
+          "begin": "/\\*!\\s*(.*)",
+          "end": "\\*/",
+          "captures": {
+            "1": {
+              "name": "meta.doc.rust",
+              "patterns": [
+                {
+                  "include": "#markdown"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "comment.block.doc.outer.rust",
+          "begin": "/\\*\\*\\s*(.*)",
+          "end": "\\*/",
+          "captures": {
+            "1": {
+              "name": "meta.doc.rust",
+              "patterns": [
+                {
+                  "include": "#markdown"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "common": {
+      "patterns": [
+        {
+          "include": "#bindings"
+        },
+        {
+          "include": "#lifetimes"
+        },
+        {
+          "include": "#types"
+        },
+        {
+          "include": "#literals"
+        },
+        {
+          "include": "#tokens"
+        }
+      ]
+    },
+    "definitions": {
+      "patterns": [
+        {
+          "name": "storage.type.function.rust",
+          "match": "\\bfn\\b"
+        },
+        {
+          "name": "storage.type.structure.rust",
+          "match": "\\bstruct\\b"
+        },
+        {
+          "name": "storage.type.enumeration.rust",
+          "match": "\\benum\\b"
+        },
+        {
+          "name": "storage.type.trait.rust",
+          "match": "\\btrait\\b"
+        },
+        {
+          "name": "keyword.other.implementation.rust",
+          "match": "\\bimpl\\b"
+        }
+      ]
+    },
+    "definitions-common": {
+      "patterns": [
+        {
+          "comment": "suppress comparison tokens",
+          "match": "<|>"
+        },
+        {
+          "name": "keyword.other.rust",
+          "match": "\\bwhere\\b"
+        },
+        {
+          "include": "#common"
+        }
+      ]
+    },
+    "enumerations": {
+      "comment": "enumeration definition",
+      "name": "meta.enumeration.rust",
+      "begin": "(?=enum\\s+\\w+)",
+      "end": "(?=\\s*[{;])",
+      "patterns": [
+        {
+          "begin": "(?=enum)",
+          "end": "(?=\\s*[<({;])",
+          "patterns": [
+            {
+              "include": "#definitions"
+            },
+            {
+              "name": "entity.name.type.enumeration.rust",
+              "match": "(?>\\b[_a-zA-Z][_a-zA-Z0-9]*)"
+            }
+          ]
+        },
+        {
+          "include": "#definitions-common"
+        }
+      ]
+    },
+    "flow": {
+      "name": "keyword.control.rust",
+      "match": "\\b(?:for|loop|while(?:\\s+let\\s+)?|break|continue|if(?:\\s+let\\s+)?|else|in|return)\\b"
+    },
+    "functions": {
+      "comment": "function definition",
+      "name": "meta.function.rust",
+      "begin": "(?=fn\\s+\\w+)",
+      "end": "(?=\\s*[{;])",
+      "patterns": [
+        {
+          "begin": "(?=fn)",
+          "end": "(?=\\s*[<(])",
+          "patterns": [
+            {
+              "include": "#definitions"
+            },
+            {
+              "name": "entity.name.function.rust",
+              "match": "(?>\\b[_a-zA-Z][_a-zA-Z0-9]*)"
+            }
+          ]
+        },
+        {
+          "begin": "\\(",
+          "end": "(?=\\s*(?:where|[{;]))",
+          "patterns": [
+            {
+              "comment": "function parameters",
+              "name": "variable.parameter.rust",
+              "match": "\\w+(?=\\s*:)"
+            },
+            {
+              "include": "#common"
+            }
+          ]
+        },
+        {
+          "include": "#definitions-common"
+        }
+      ]
+    },
+    "labels": {
+      "name": "variable.other.label.rust",
+      "match": "'\\w+(?=\\s*:\\s*(?:for|loop|while))"
+    },
+    "lambdas": {
+      "comment": "lambda definition",
+      "name": "meta.function.lambda.rust",
+      "begin": "(?=\\|([^|]*)\\|)",
+      "end": "(?=\\s*[{;)])",
+      "patterns": [
+        {
+          "comment": "lambda parameters",
+          "name": "variable.parameter.rust",
+          "match": "\\w+(?=\\s*:)"
+        },
+        {
+          "include": "#common"
+        }
+      ]
+    },
+    "library": {
+      "patterns": [
+        {
+          "name": "support.other.macro.rust",
+          "match": "(?:cfg|column|concat(?:_idents)?|(?:debug_)?assert(?:_eq)?|(?:option_)?env|file|format(?:_args)?|include(?:_bytes|_str)?|line|module_path|panic|print(?:ln)?|(?:scoped_)?thread_local|select|stringify|try|unimplemented|unreachable|vec|write(?:ln)?)\\s*!(?=\\s*[\\[({])"
+        }
+      ]
+    },
+    "lifetimes": {
+      "name": "storage.modifier.lifetime.rust",
+      "match": "'\\w+(?!\\s*:\\s*(?:for|loop|while))(?=(?:$|\\W))"
+    },
+    "linkage": {
+      "patterns": [
+        {
+          "name": "keyword.other.rust",
+          "match": "\\b(?:crate|extern|pub|mod|super)\\b"
+        },
+        {
+          "comment": "suppress textual matches",
+          "begin": "\\b(use)\\b",
+          "end": ";",
+          "captures": {
+            "1": {
+              "name": "keyword.other.rust"
+            }
+          }
+        }
+      ]
+    },
+    "literals": {
+      "patterns": [
+        {
+          "include": "#strings"
+        },
+        {
+          "include": "#booleans"
+        },
+        {
+          "include": "#numbers"
+        }
+      ]
+    },
+    "macros": {
+      "comment": "macro definition",
+      "name": "meta.macro.rust",
+      "begin": "\\b(macro_rules!)(?=\\s)",
+      "end": "(?=\\s*[{;])",
+      "captures": {
+        "1": {
+          "name": "support.other.macro.rust"
+        }
+      },
+      "patterns": [
+        {
+          "name": "entity.name.other.macro.rust",
+          "match": "(?>\\b[_a-zA-Z][_a-zA-Z0-9]*)"
+        }
+      ]
+    },
+    "markdown": {
+      "patterns": [
+        {
+          "comment": "will need custom styling for clarity",
+          "disabled": true,
+          "name": "source.gfm",
+          "include": "source.gfm"
+        }
+      ]
+    },
+    "miscellaneous": {
+      "patterns": [
+        {
+          "name": "keyword.control.match.rust",
+          "match": "\\bmatch\\b"
+        },
+        {
+          "name": "keyword.other.rust",
+          "match": "\\b(?:unsafe|move)\\b"
+        }
+      ]
+    },
+    "numbers": {
+      "name": "constant.numeric.rust",
+      "match": "(?<!(?:\\w|(?:(?<!\\.)\\.)))[0-9][_0-9]*(?:\\.(?!\\.)(?:[0-9][_0-9]*)?)?(?:[eE][+\\-]?[_0-9]+)?(?:[iu](?:8|16|32|64|size)|f(?:32|64|size))?"
+    },
+    "operators": {
+      "patterns": [
+        {
+          "name": "keyword.operator.arithmetic.compound-assignment.rust",
+          "match": "[\\+\\-*\\/%]="
+        },
+        {
+          "name": "keyword.operator.bitwise.compound-assignment.rust",
+          "match": "(?:[&|^]|<<|>>)="
+        },
+        {
+          "name": "keyword.operator.comparison.rust",
+          "match": "(?:=|!|<|>)="
+        },
+        {
+          "name": "keyword.operator.assignment.rust",
+          "match": "="
+        },
+        {
+          "name": "keyword.operator.logical.rust",
+          "match": "\\|\\||&&"
+        },
+        {
+          "name": "keyword.operator.arithmetic.rust",
+          "match": "/"
+        },
+        {
+          "name": "keyword.operator.bitwise.rust",
+          "match": "\\^|<<|>>"
+        },
+        {
+          "name": "keyword.operator.complement.rust",
+          "match": "!"
+        },
+        {
+          "comment": "generics vs. comparison",
+          "name": "keyword.operator.rust",
+          "match": "<|>"
+        },
+        {
+          "comment": "compound type constraint vs. add",
+          "name": "keyword.operator.rust",
+          "match": "\\+"
+        },
+        {
+          "comment": "subtract vs. negate",
+          "name": "keyword.operator.rust",
+          "match": "-"
+        },
+        {
+          "comment": "multiply vs. dereference vs. pointer",
+          "name": "keyword.operator.rust",
+          "match": "\\*"
+        },
+        {
+          "comment": "bitwise and vs. borrow",
+          "name": "keyword.operator.rust",
+          "match": "&"
+        },
+        {
+          "comment": "bitwise or vs. pattern alternative",
+          "name": "keyword.operator.rust",
+          "match": "\\|"
+        },
+        {
+          "comment": "range vs. struct fill",
+          "name": "keyword.operator.rust",
+          "match": "\\.\\.\\.?"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "comment": "raw byte string literal (hashed)",
+          "name": "string.quoted.double.hashed.raw.byte.rust",
+          "match": "br(#+)\"[\\x00-\\x7f]*\"\\1"
+        },
+        {
+          "comment": "raw byte string literal",
+          "name": "string.quoted.double.raw.byte.rust",
+          "match": "br\"(?:(?!\")[\\x00-\\x7f])*\""
+        },
+        {
+          "comment": "raw string literal (hashed)",
+          "name": "string.quoted.double.hashed.raw.rust",
+          "match": "(?<!b)r(#+)\".*\"\\1"
+        },
+        {
+          "comment": "raw string literal",
+          "name": "string.quoted.double.raw.rust",
+          "match": "(?<!b)r\"[^\"\\n]*\""
+        },
+        {
+          "comment": "byte string literal",
+          "name": "string.quoted.double.byte.rust",
+          "match": "b\"(?:\\\\(?:[0nrt\"\\\\]|x[0-9a-fA-F]{2})|(?!\\\\)[\\x00-\\x7f])*\""
+        },
+        {
+          "comment": "string literal",
+          "name": "string.quoted.double.rust",
+          "match": "(?<![\\\\br#])\"(?:\\\\\"|[^\\\\\"\\n]+)*\""
+        },
+        {
+          "comment": "byte literal",
+          "name": "string.quoted.single.byte.rust",
+          "match": "b'(?:\\\\(?:[0nrt'\\\\]|x[0-9a-fA-F]{2})|[\\x00-\\x7f])'"
+        },
+        {
+          "comment": "char literal",
+          "name": "string.quoted.single.char.rust",
+          "match": "(?<!b)'(?:\\\\(?:[0nrt'\\\\]|x[0-9a-fA-F]{2}|u\\{[0-9a-fA-F]{1,6}\\}))'"
+        }
+      ]
+    },
+    "structures": {
+      "comment": "struct definition",
+      "name": "meta.structure.rust",
+      "begin": "(?=struct\\s+\\w+)",
+      "end": "(?=\\s*[{;])",
+      "patterns": [
+        {
+          "begin": "(?=struct)",
+          "end": "(?=\\s*[<({;])",
+          "patterns": [
+            {
+              "include": "#definitions"
+            },
+            {
+              "name": "entity.name.type.struct.rust",
+              "match": "(?>\\b[_a-zA-Z][_a-zA-Z0-9]*)"
+            }
+          ]
+        },
+        {
+          "include": "#definitions-common"
+        }
+      ]
+    },
+    "symbols": {
+      "patterns": [
+        {
+          "match": "(->)\\s*(!)?",
+          "captures": {
+            "1": {
+              "name": "punctuation.symbol.return-type.rust"
+            },
+            "2": {
+              "name": "punctuation.symbol.diverging-function.rust"
+            }
+          }
+        },
+        {
+          "name": "punctuation.symbol.match-branch.rust",
+          "match": "=>"
+        },
+        {
+          "name": "punctuation.symbol.pattern-binding.rust",
+          "match": "@"
+        },
+        {
+          "name": "punctuation.symbol.ignored-binding.rust",
+          "match": "(?<=\\W)_(?=\\W)"
+        },
+        {
+          "comment": "path vs. associations",
+          "name": "punctuation.symbol.rust",
+          "match": "::"
+        },
+        {
+          "comment": "constraint vs. struct initialiser vs. inherit",
+          "name": "punctuation.symbol.rust",
+          "match": ":"
+        },
+        {
+          "comment": "member access",
+          "name": "punctuation.symbol.rust",
+          "match": "(?<!\\.)\\.(?!\\.)"
+        }
+      ]
+    },
+    "tokens": {
+      "patterns": [
+        {
+          "include": "#symbols"
+        },
+        {
+          "include": "#operators"
+        }
+      ]
+    },
+    "traits": {
+      "comment": "trait definition",
+      "name": "meta.trait.rust",
+      "begin": "(?=trait\\s+\\w+)",
+      "end": "(?=\\s*[{;])",
+      "patterns": [
+        {
+          "begin": "(?=trait)",
+          "end": "(?=\\s*[<({;])",
+          "patterns": [
+            {
+              "include": "#definitions"
+            },
+            {
+              "name": "entity.name.type.trait.rust",
+              "match": "(?>\\b[_a-zA-Z][_a-zA-Z0-9]*)"
+            }
+          ]
+        },
+        {
+          "include": "#definitions-common"
+        }
+      ]
+    },
+    "types": {
+      "patterns" : [
+        {
+          "name": "storage.type.primitive.rust",
+          "match": "\\b(?:u8|u16|u32|u64|i8|i16|i32|i64|f32|f64|usize|fsize|char|bool)\\b"
+        },
+        {
+          "name": "storage.type.self.rust",
+          "match": "\\b[sS]elf\\b"
+        },
+        {
+          "name": "storage.type.raw-pointer.rust",
+          "match": "\\*(?:const|mut)\\s+\\w+"
+        },
+        {
+          "name": "storage.type.rust",
+          "match": "\\b(?:String|str)\\b"
+        },
+        {
+          "name": "storage.type.unsized.rust",
+          "match": "\\?Sized\\b"
+        },
+        {
+          "name": "storage.type.rust",
+          "match": "\\btype\\b"
+        }
+      ]
+    }
+  },
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#literals"
+    },
+    {
+      "include": "#labels"
+    },
+    {
+      "include": "#attributes"
+    },
+    {
+      "include": "#library"
+    },
+    {
+      "include": "#macros"
+    },
+    {
+      "include": "#casts"
+    },
+    {
+      "include": "#enumerations"
+    },
+    {
+      "include": "#functions"
+    },
+    {
+      "include": "#lambdas"
+    },
+    {
+      "include": "#linkage"
+    },
+    {
+      "include": "#structures"
+    },
+    {
+      "include": "#traits"
+    },
+    {
+      "include": "#implementations"
+    },
+    {
+      "include": "#flow"
+    },
+    {
+      "include": "#miscellaneous"
+    },
+    {
+      "include": "#definitions"
+    },
+    {
+      "include": "#common"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+@import "syntax-variables";
+
+.define-default() {
+  /* Selections based off One Dark theme default colour */
+  @syntax-text-color: hsl(220, 14%, 71%);
+  @color-1: mix(@syntax-text-color, #806040, 50%);
+  @color-2: mix(@syntax-text-color, #e7007d, 50%);
+  @color-3: mix(@syntax-text-color, #00f0ff, 50%);
+  @color-4: mix(@syntax-text-color, #2255bb, 50%);
+}
+
+.define-default();
+
+atom-text-editor::shadow .source.rust {
+
+  .attribute {
+    color: @color-1;
+  }
+
+  .lifetime {
+    color: @color-2;
+  }
+
+  .macro {
+    color: @color-3;
+  }
+
+  .parameter {
+    color: @color-4;
+  }
+
+}

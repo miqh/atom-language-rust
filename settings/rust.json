@@ -1,0 +1,14 @@
+{
+  ".source.rust": {
+    "editor": {
+      "autoIndentOnPaste": true,
+      "commentEnd": "*/",
+      "commentStart": "//|/\\*",
+      "decreaseIndentPattern": "\\}",
+      "foldEndPattern": "^\\s*\\}",
+      "increaseIndentPattern": "\\{",
+      "softTabs": true,
+      "tabLength": 4
+    }
+  }
+}

@@ -5,6 +5,10 @@
   "author": "Michael Huynh <miqid@outlook.com> (https://github.com/miqid)",
   "keywords": ["rust", "grammar", "language", "syntax"],
   "repository": "https://github.com/miqid/atom-language-rust",
+  "homepage": "https://atom.io/packages/atom-language-rust",
+  "bugs": {
+    "url": "https://github.com/miqid/atom-language-rust/issues"
+  },
   "license": "MIT",
   "main": "./index.js",
   "engines": {

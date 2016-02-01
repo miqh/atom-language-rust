@@ -207,12 +207,12 @@
         },
         {
           "begin": "\\(",
-          "end": "(?=\\s*(?:where|[{;]))",
+          "end": "(?=\\s*(?:where|->|[{;]))",
           "patterns": [
             {
               "comment": "function parameters",
               "name": "variable.parameter.rust",
-              "match": "\\w+(?=\\s*:)"
+              "match": "(\\w++)(?=\\s*(?<!:):(?!:))"
             },
             {
               "include": "#common"

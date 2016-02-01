@@ -1,5 +1,7 @@
 # atom-language-rust
 
+[![apm][apm-badge]][apm]
+
 A package for [Atom][atom] that provides rudimentary lexing of source code
 written in the [Rust][rust] programming language to support syntax highlighting.
 
@@ -25,5 +27,7 @@ Things to expect:
 
 Details to follow once the source for this package reaches a stable state.
 
+[apm]: https://atom.io/packages/atom-language-rust
+[apm-badge]: https://img.shields.io/apm/v/atom-language-rust.svg?style=flat-square
 [atom]: https://atom.io/
 [rust]: https://www.rust-lang.org/

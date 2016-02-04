@@ -4,9 +4,9 @@
       "autoIndentOnPaste": true,
       "commentEnd": "*/",
       "commentStart": "//|/\\*",
-      "decreaseIndentPattern": "\\}",
+      "decreaseIndentPattern": "^\\s*[})\\]][;\\s]*$",
       "foldEndPattern": "^\\s*\\}",
-      "increaseIndentPattern": "\\{",
+      "increaseIndentPattern": "^.*(?:\\{[^}'\"]*|\\([^)'\"]*|\\[[^\\]'\"]*)$",
       "softTabs": true,
       "tabLength": 4
     }

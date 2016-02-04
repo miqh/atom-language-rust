@@ -405,43 +405,125 @@
       "patterns": [
         {
           "comment": "raw byte string literal (hashed)",
-          "name": "string.quoted.double.hashed.raw.byte.rust",
-          "match": "br(#+)\"[\\x00-\\x7f]*\"\\1"
+          "name": "string.quoted.double.raw.byte.rust",
+          "begin": "br(#+)\"",
+          "end": "\"\\1",
+          "patterns": [
+            {
+              "comment": "non-ascii character",
+              "name": "invalid.illegal.rust",
+              "match": "[^\\x00-\\x7f]++"
+            }
+          ]
         },
         {
           "comment": "raw byte string literal",
           "name": "string.quoted.double.raw.byte.rust",
-          "match": "br\"(?:(?!\")[\\x00-\\x7f])*\""
+          "begin": "br\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "comment": "non-ascii character",
+              "name": "invalid.illegal.rust",
+              "match": "[^\\x00-\\x7f]++"
+            }
+          ]
         },
         {
           "comment": "raw string literal (hashed)",
-          "name": "string.quoted.double.hashed.raw.rust",
-          "match": "(?<!b)r(#+)\".*\"\\1"
+          "name": "string.quoted.double.raw.rust",
+          "begin": "r(#+)\"",
+          "end": "\"\\1"
         },
         {
           "comment": "raw string literal",
           "name": "string.quoted.double.raw.rust",
-          "match": "(?<!b)r\"[^\"\\n]*\""
+          "begin": "r\"",
+          "end": "\""
         },
         {
           "comment": "byte string literal",
           "name": "string.quoted.double.byte.rust",
-          "match": "b\"(?:\\\\(?:[0nrt\"\\\\]|x[0-9a-fA-F]{2})|(?!\\\\)[\\x00-\\x7f])*\""
+          "begin": "b\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "match": "\\\\(?:x[a-fA-F0-9]{2}|[0nrt'\"\\\\n])|(\\\\(?:x.{1,2}|.))",
+              "captures": {
+                "1": {
+                  "comment": "bad escape",
+                  "name": "invalid.illegal.rust"
+                }
+              }
+            },
+            {
+              "comment": "non-ascii character",
+              "name": "invalid.illegal.rust",
+              "match": "[^\\x00-\\x7f]++"
+            }
+          ]
         },
         {
           "comment": "string literal",
           "name": "string.quoted.double.rust",
-          "match": "(?<![\\\\br#])\"(?:\\\\\"|[^\\\\\"\\n]+)*\""
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "match": "\\\\(?:u\\{(?:[a-fA-F0-9]{1,5}|0[a-fA-F0-9]{5}|10[a-fA-F0-9]{4})\\}|x[0-7][a-fA-F0-9]|[0nrt'\"\\\\n])|(\\\\(?:u\\{[^}]*\\}|x.{1,2}|\\\\.))",
+              "captures": {
+                "1": {
+                  "comment": "bad escape",
+                  "name": "invalid.illegal.rust"
+                }
+              }
+            }
+          ]
         },
         {
           "comment": "byte literal",
           "name": "string.quoted.single.byte.rust",
-          "match": "b'(?:\\\\(?:[0nrt'\\\\]|x[0-9a-fA-F]{2})|[\\x00-\\x7f])'"
+          "match": "b'(.+)'",
+          "captures": {
+            "1": {
+              "patterns": [
+                {
+                  "match": "\\\\(?:x[a-fA-F0-9]{2}|[0nrt'\"\\\\n])|(\\\\(?:x.{1,2}|.*))",
+                  "captures": {
+                    "1": {
+                      "comment": "bad escape",
+                      "name": "invalid.illegal.rust"
+                    }
+                  }
+                },
+                {
+                  "comment": "non-ascii character",
+                  "name": "invalid.illegal.rust",
+                  "match": "[^\\x00-\\x7f]*"
+                }
+              ]
+            }
+          }
         },
         {
-          "comment": "char literal",
-          "name": "string.quoted.single.char.rust",
-          "match": "(?<!b)'(?:\\\\(?:[0nrt'\\\\]|x[0-9a-fA-F]{2}|u\\{[0-9a-fA-F]{1,6}\\}))'"
+          "comment": "character literal",
+          "name": "string.quoted.single.character.rust",
+          "match": "'(.+)'",
+          "captures": {
+            "1": {
+              "patterns": [
+                {
+                  "match": "\\\\(?:u\\{(?:[a-fA-F0-9]{1,5}|0[a-fA-F0-9]{5}|10[a-fA-F0-9]{4})\\}|x[0-7][a-fA-F0-9]|[0nrt'\"\\\\n])|(\\\\(?:u\\{[^}]*\\}|x.{1,2}|.*))",
+                  "captures": {
+                    "1": {
+                      "comment": "bad escape",
+                      "name": "invalid.illegal.rust"
+                    }
+                  }
+                }
+              ]
+            }
+          }
         }
       ]
     },

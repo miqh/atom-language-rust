@@ -483,25 +483,19 @@
         {
           "comment": "byte literal",
           "name": "string.quoted.single.byte.rust",
-          "match": "b'(.+)'",
+          "match": "b'(?:\\\\(?:x[a-fA-F0-9]{2}|[0nrt'\"\\\\n])|([^\\x00-\\x7f]++)|(\\\\(?:x.{1,2}|.)?)|.)([^']++)?'",
           "captures": {
             "1": {
-              "patterns": [
-                {
-                  "match": "\\\\(?:x[a-fA-F0-9]{2}|[0nrt'\"\\\\n])|(\\\\(?:x.{1,2}|.*))",
-                  "captures": {
-                    "1": {
-                      "comment": "bad escape",
-                      "name": "invalid.illegal.rust"
-                    }
-                  }
-                },
-                {
-                  "comment": "non-ascii character",
-                  "name": "invalid.illegal.rust",
-                  "match": "[^\\x00-\\x7f]*"
-                }
-              ]
+              "comment": "non-ascii character",
+              "name": "invalid.illegal.rust"
+            },
+            "2": {
+              "comment": "bad escape",
+              "name": "invalid.illegal.rust"
+            },
+            "3": {
+              "comment": "superfluous characters",
+              "name": "invalid.illegal.rust"
             }
           }
         },

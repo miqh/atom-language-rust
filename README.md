@@ -22,6 +22,7 @@ Things to expect:
 - [ ] Add ability to disable included styles
 - [ ] Add some useful snippets
 - [ ] Add grammar tests
+- [ ] Add a list of all available scopes (for third-party styling purposes)
 
 ## Contributing
 

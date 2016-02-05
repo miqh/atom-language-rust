@@ -254,7 +254,7 @@
     },
     "lifetimes": {
       "name": "storage.modifier.lifetime.rust",
-      "match": "'\\w+(?!\\s*:\\s*(?:for|loop|while))(?=(?:$|\\W))"
+      "match": "(?<!b)'\\w++(?!\\s*:\\s*(?:for|loop|while))(?=(?:$|\\W))"
     },
     "linkage": {
       "patterns": [
@@ -508,20 +508,11 @@
         {
           "comment": "character literal",
           "name": "string.quoted.single.character.rust",
-          "match": "'(.+)'",
+          "match": "'(?:\\\\(?:u\\{(?:[a-fA-F0-9]{1,5}|0[a-fA-F0-9]{5}|10[a-fA-F0-9]{4})\\}|x[0-7][a-fA-F0-9]|[0nrt'\"\\\\n])|(\\\\(?:u\\{?[^}]*\\}?|x.{1,2}|.)?)|.)'",
           "captures": {
             "1": {
-              "patterns": [
-                {
-                  "match": "\\\\(?:u\\{(?:[a-fA-F0-9]{1,5}|0[a-fA-F0-9]{5}|10[a-fA-F0-9]{4})\\}|x[0-7][a-fA-F0-9]|[0nrt'\"\\\\n])|(\\\\(?:u\\{[^}]*\\}|x.{1,2}|.*))",
-                  "captures": {
-                    "1": {
-                      "comment": "bad escape",
-                      "name": "invalid.illegal.rust"
-                    }
-                  }
-                }
-              ]
+              "comment": "bad escape",
+              "name": "invalid.illegal.rust"
             }
           }
         }

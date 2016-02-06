@@ -7,13 +7,35 @@
       "patterns": [
         {
           "name": "meta.attribute.inner.rust",
-          "begin": "^\\s*#\\s*!\\s*\\[",
-          "end": "\\]"
+          "begin": "#\\s*!\\s*\\[",
+          "end": "\\]",
+          "patterns": [
+            {
+              "include": "#attributes-common"
+            }
+          ]
         },
         {
           "name": "meta.attribute.outer.rust",
-          "begin": "^\\s*#\\s*\\[",
-          "end": "\\]"
+          "begin": "#\\s*\\[",
+          "end": "\\]",
+          "patterns": [
+            {
+              "include": "#attributes-common"
+            }
+          ]
+        }
+      ]
+    },
+    "attributes-common": {
+      "comment": "sub-attributes",
+      "begin": "\\(",
+      "end": "\\)",
+      "patterns": [
+        {
+          "comment": "attribute value",
+          "begin": "\"",
+          "end": "(?<!\\\\)\""
         }
       ]
     },

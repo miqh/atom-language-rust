@@ -1,9 +1,10 @@
 # atom-language-rust
 
 [![apm][apm-badge]][apm]
+[![ci][ci-badge]][ci]
 
-A package for [Atom][atom] that provides rudimentary lexing of source code
-written in the [Rust][rust] programming language to support syntax highlighting.
+A package for [Atom][] that provides rudimentary lexing of source code
+written in the [Rust][] programming language to support syntax highlighting.
 
 ## Motivation
 
@@ -19,7 +20,7 @@ version of Rust!
 
 Things to expect:
 
-- [ ] Add ability to disable included styles
+- [x] Add ability to disable included styles
 - [ ] Add some useful snippets
 - [ ] Add grammar tests
 - [ ] Add a list of all available scopes (for third-party styling purposes)
@@ -31,4 +32,6 @@ Details to follow once the source for this package reaches a stable state.
 [apm]: https://atom.io/packages/atom-language-rust
 [apm-badge]: https://img.shields.io/apm/v/atom-language-rust.svg?style=flat-square
 [atom]: https://atom.io/
+[ci]: https://travis-ci.org/miqid/atom-language-rust
+[ci-badge]: https://img.shields.io/travis/miqid/atom-language-rust/master.svg?style=flat-square
 [rust]: https://www.rust-lang.org/

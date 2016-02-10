@@ -276,7 +276,7 @@
     },
     "lifetimes": {
       "name": "storage.modifier.lifetime.rust",
-      "match": "(?<!b)'\\w++(?!\\s*:\\s*(?:for|loop|while))(?=(?:$|\\W))"
+      "match": "(?>'\\w+)(?!')(?!\\s*:\\s*(?:for|loop|while))"
     },
     "linkage": {
       "patterns": [

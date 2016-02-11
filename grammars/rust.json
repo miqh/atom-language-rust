@@ -172,8 +172,19 @@
           "match": "<|>"
         },
         {
-          "name": "keyword.other.rust",
-          "match": "\\bwhere\\b"
+          "begin": "\\b(where)\\s+",
+          "end": "(?=\\s*[{;])",
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.other.rust"
+            }
+          },
+          "patterns": [
+            {
+              "name": "variable.parameter.rust",
+              "match": "(\\w++)(?=\\s*:(?!:))"
+            }
+          ]
         },
         {
           "include": "#common"
@@ -234,7 +245,7 @@
             {
               "comment": "function parameters",
               "name": "variable.parameter.rust",
-              "match": "(\\w++)(?=\\s*(?<!:):(?!:))"
+              "match": "(\\w++)(?=\\s*:(?!:))"
             },
             {
               "include": "#common"

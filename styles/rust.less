@@ -1,32 +1,33 @@
 @import (reference) "syntax-variables";
 
+/* Default colors have been selected to style well with the One Dark theme */
 .define-default() {
-  /* Selections based off One Dark theme default colour */
   @syntax-text-color: hsl(220, 14%, 71%);
-  @color-1: mix(@syntax-text-color, #806040, 50%);
-  @color-2: mix(@syntax-text-color, #e7007d, 50%);
-  @color-3: mix(@syntax-text-color, #00f0ff, 50%);
-  @color-4: mix(@syntax-text-color, #2255bb, 50%);
 }
-
 .define-default();
+
+/* Note that these colors should take precedence over themes */
+@syntax-color-attribute: mix(@syntax-text-color, #806040, 50%);
+@syntax-color-lifetime: mix(@syntax-text-color, #e7007d, 50%);
+@syntax-color-macro: mix(@syntax-text-color, #00f0ff, 50%);
+@syntax-color-parameter: mix(@syntax-text-color, #2255bb, 50%);
 
 atom-text-editor::shadow .source.rust {
 
   .attribute {
-    color: @color-1;
+    color: @syntax-color-attribute;
   }
 
   .lifetime {
-    color: @color-2;
+    color: @syntax-color-lifetime;
   }
 
   .macro {
-    color: @color-3;
+    color: @syntax-color-macro;
   }
 
   .parameter {
-    color: @color-4;
+    color: @syntax-color-parameter;
   }
 
 }

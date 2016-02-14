@@ -337,6 +337,48 @@
         }
       ]
     },
+    "macros-common": {
+      "patterns": [
+        {
+          "comment": "special path expansion for macro export",
+          "name": "variable.language.rust",
+          "match": "\\$crate(?=::)"
+        },
+        {
+          "match": "(\\$\\w+)[^:]*:(?!:)\\s*([^.:;,=)}\\]]+)",
+          "captures": {
+            "1": {
+              "name": "variable.other.macro-capture.rust"
+            },
+            "2": {
+              "patterns": [
+                {
+                  "match": "(item|block|stmt|pat|expr|ty|ident|path|tt|meta)(?=\\W)",
+                  "captures": {
+                    "1": {
+                      "name": "keyword.other.macro-designator.rust"
+                    }
+                  }
+                },
+                {
+                  "include": "#casts"
+                },
+                {
+                  "include": "#flow"
+                },
+                {
+                  "include": "#common"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "variable.other.macro-substitution.rust",
+          "match": "\\$\\w+"
+        }
+      ]
+    },
     "markdown": {
       "patterns": [
         {
@@ -741,6 +783,9 @@
     },
     {
       "include": "#definitions"
+    },
+    {
+      "include": "#macros-common"
     },
     {
       "include": "#common"

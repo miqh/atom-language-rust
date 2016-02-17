@@ -1,0 +1,76 @@
+{
+  ".source.rust": {
+    "else": {
+      "prefix": "else",
+      "body": "else {\n\t$1\n}"
+    },
+    "fn": {
+      "prefix": "fn",
+      "body": "fn ${1:ident}(${2:args}) {\n\t$3\n}"
+    },
+    "for-loop": {
+      "prefix": "for",
+      "body": "for ${1:pat} in ${2:expr} {\n\t$3\n}"
+    },
+    "enum": {
+      "prefix": "enum",
+      "body": "enum ${1:ident} {\n\t$2\n}"
+    },
+    "if": {
+      "prefix": "if",
+      "body": "if ${1:expr} {\n\t$2\n}"
+    },
+    "if-let": {
+      "prefix": "iflet",
+      "body": "if let ${1:pat} = ${2:expr} {\n\t$3\n}"
+    },
+    "impl": {
+      "prefix": "impl",
+      "body": "impl ${1:ty} {\n\t$2\n}"
+    },
+    "loop": {
+      "prefix": "loop",
+      "body": "loop {\n\t$1\n}"
+    },
+    "macro": {
+      "prefix": "macro",
+      "body": "macro_rules! ${1:ident} {\n\t($2) => ($3)\n}"
+    },
+    "main": {
+      "prefix": "main",
+      "body": "fn main() {\n\t$1\n}"
+    },
+    "match": {
+      "prefix": "match",
+      "body": "match ${1:expr} {\n\t${2:_ => ()},\n}"
+    },
+    "mod": {
+      "prefix": "mod",
+      "body": "mod ${1:ident} {\n\t$2\n}"
+    },
+    "return": {
+      "prefix": "return",
+      "body": "return ${1:expr};"
+    },
+    "struct": {
+      "prefix": "struct",
+      "body": "struct ${1:ident} {\n\t$2\n}"
+    },
+    "trait": {
+      "prefix": "trait",
+      "body": "trait ${1:ident} {\n\t$2\n}"
+    },
+    "unsafe": {
+      "prefix": "unsafe",
+      "body": "unsafe {\n\t$1\n}"
+    },
+    "while": {
+      "prefix": "while",
+      "body": "while ${1:expr} {\n\t$2\n}"
+    },
+    "while-let": {
+      "prefix": "whilelet",
+      "body": "while let ${1:pat} = ${2:expr} {\n\t$3\n}"
+    }
+  }
+}

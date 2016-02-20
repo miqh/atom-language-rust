@@ -8,6 +8,7 @@
 
 /* Note that these colors should take precedence over themes */
 @syntax-color-attribute: mix(@syntax-text-color, #806040, 50%);
+@syntax-color-documentation: desaturate(darken(@syntax-text-color, 35%), 5%);
 @syntax-color-lifetime: mix(@syntax-text-color, #e7007d, 50%);
 @syntax-color-macro: mix(@syntax-text-color, #00f0ff, 50%);
 @syntax-color-parameter: mix(@syntax-text-color, #2255bb, 50%);
@@ -18,12 +19,62 @@ atom-text-editor::shadow .source.rust {
     color: @syntax-color-attribute;
   }
 
+  .documentation {
+    color: @syntax-color-documentation;
+    font-style: normal;
+    font-weight: normal;
+  }
+
   .lifetime {
     color: @syntax-color-lifetime;
   }
 
   .macro {
     color: @syntax-color-macro;
+  }
+
+  .markup {
+    color: @syntax-color-documentation;
+    font-style: normal;
+    font-weight: normal;
+    &.bold {
+      font-weight: bold;
+    }
+    &.definition {
+      background-color: fadeout(@syntax-color-documentation, 93%);
+      border: 1px solid fadeout(@syntax-color-documentation, 93%);
+      border-radius: 1px;
+      color: fadeout(@syntax-color-documentation, 6%);
+    }
+    &.heading {
+      color: lighten(@syntax-color-documentation, 16%);
+      font-weight: bold;
+    }
+    &.italic {
+      font-style: italic;
+    }
+    &.link-text {
+      color: lighten(@syntax-color-documentation, 11%);
+    }
+    &.link-url {
+      color: fadeout(@syntax-color-documentation, 3%);
+      text-decoration: underline;
+    }
+    &.quote {
+      color: fadeout(@syntax-color-documentation, 6%);
+      font-style: italic;
+    }
+    &.strikethrough {
+      color: fadeout(@syntax-color-documentation, 8%);
+      text-decoration: line-through;
+    }
+    &.raw {
+      color: lighten(@syntax-color-documentation, 11%);
+    }
+    &.symbol {
+      color: lighten(@syntax-color-documentation, 10%);
+      font-weight: bold;
+    }
   }
 
   .parameter {

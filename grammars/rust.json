@@ -55,35 +55,104 @@
       "patterns": [
         {
           "name": "comment.line.rust",
-          "match": "(?<!/)//(?![/!]).*"
+          "match": "//(?![/!]).*"
         },
         {
-          "name": "comment.line.doc.inner.rust",
-          "match": "//!\\s*(.*)",
-          "captures": {
+          "name": "comment.block.documentation.rust",
+          "begin": "^\\s*(//[/!])",
+          "beginCaptures": {
             "1": {
-              "name": "meta.doc.rust",
+              "name": "markup.definition.rust"
+            }
+          },
+          "end": "(?=^\\s*(?!//[/!]))",
+          "patterns": [
+            {
+              "match": "(?<=//[/!])\\s*(#.+)",
+              "captures": {
+                "1": {
+                  "name": "markup.heading.rust"
+                }
+              }
+            },
+            {
+              "name": "markup.list.unnumbered.rust",
+              "match": "(?<=//[/!])\\s*([*+\\-])(?=\\s)(.*)",
+              "captures": {
+                "1": {
+                  "name": "markup.symbol.rust"
+                },
+                "2": {
+                  "patterns": [
+                    {
+                      "include": "#markdown-inline"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "markup.list.numbered.rust",
+              "match": "(?<=//[/!])\\s*(\\d+\\.)(?=\\s)(.*)",
+              "captures": {
+                "1": {
+                  "name": "markup.symbol.rust"
+                },
+                "2": {
+                  "patterns": [
+                    {
+                      "include": "#markdown-inline"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "match": "(?<=//[/!])\\s*(>)(.*)",
+              "captures": {
+                "1": {
+                  "name": "markup.symbol.rust"
+                },
+                "2": {
+                  "name": "markup.quote.rust"
+                }
+              }
+            },
+            {
+              "begin": "(?<=//[/!])\\s*(```)",
+              "end": "(```)",
+              "beginCaptures": {
+                "1": {
+                  "name": "markup.symbol.rust"
+                }
+              },
+              "endCaptures": {
+                "1": {
+                  "name": "markup.symbol.rust"
+                }
+              },
               "patterns": [
                 {
-                  "include": "#markdown"
+                  "match": "(//[/!])\\s*([^`]*)",
+                  "captures": {
+                    "1": {
+                      "name": "markup.definition.rust"
+                    },
+                    "2": {
+                      "name": "markup.raw.block.rust"
+                    }
+                  }
                 }
               ]
+            },
+            {
+              "include": "#markdown-inline"
+            },
+            {
+              "name": "markup.definition.rust",
+              "match": "(//[/!])"
             }
-          }
-        },
-        {
-          "name": "comment.line.doc.outer.rust",
-          "match": "///\\s*(.*)",
-          "captures": {
-            "1": {
-              "name": "meta.doc.rust",
-              "patterns": [
-                {
-                  "include": "#markdown"
-                }
-              ]
-            }
-          }
+          ]
         },
         {
           "name": "comment.block.rust",
@@ -386,6 +455,123 @@
           "disabled": true,
           "name": "source.gfm",
           "include": "source.gfm"
+        }
+      ]
+    },
+    "markdown-inline": {
+      "patterns": [
+        {
+          "comment": "raw text does not have compound styles",
+          "name": "markup.raw.inline.rust",
+          "match": "(`+)[^`]++\\1"
+        },
+        {
+          "comment": "do not allow compound styles inside inline links",
+          "match": "(?<!\\\\)(\\[)([^\\]]+)(?<!\\\\)(\\])\\s*(?<!\\\\)(\\()([^\\)]+)(?<!\\\\)(\\))",
+          "captures": {
+            "1": {
+              "name": "markup.symbol.rust"
+            },
+            "2": {
+              "name": "markup.link-text.rust"
+            },
+            "3": {
+              "name": "markup.symbol.rust"
+            },
+            "4": {
+              "name": "markup.symbol.rust"
+            },
+            "5": {
+              "name": "markup.link-url.rust"
+            },
+            "6": {
+              "name": "markup.symbol.rust"
+            }
+          }
+        },
+        {
+          "comment": "do not allow compound styles inside reference links",
+          "match": "(?<!\\\\)(\\[)([^\\]]+)(?<!\\\\)(\\])\\s*(?<!\\\\)(\\[)([^\\]]*)(?<!\\\\)(\\])",
+          "captures": {
+            "1": {
+              "name": "markup.symbol.rust"
+            },
+            "2": {
+              "name": "markup.link-text.rust"
+            },
+            "3": {
+              "name": "markup.symbol.rust"
+            },
+            "4": {
+              "name": "markup.symbol.rust"
+            },
+            "5": {
+              "name": "markup.link-text.rust"
+            },
+            "6": {
+              "name": "markup.symbol.rust"
+            }
+          }
+        },
+        {
+          "comment": "do not allow compound styles inside reference link locations",
+          "match": "(?<!\\\\)(\\[)([^\\]]+)(?<!\\\\)(\\])\\s*(:)\\s*(\\S+)$",
+          "captures": {
+            "1": {
+              "name": "markup.symbol.rust"
+            },
+            "2": {
+              "name": "markup.link-text.rust"
+            },
+            "3": {
+              "name": "markup.symbol.rust"
+            },
+            "4": {
+              "name": "markup.symbol.rust"
+            },
+            "5": {
+              "name": "markup.link-url.rust"
+            }
+          }
+        },
+        {
+          "name": "markup.bold.rust",
+          "match": "(?<!\\\\)(\\*\\*|__)([^\\1]+?)(?<!\\\\)\\1",
+          "captures": {
+            "2": {
+              "patterns": [
+                {
+                  "include": "#markdown-inline"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "markup.italic.rust",
+          "match": "(?<!\\\\)([*_])([^\\1]+?)(?<!\\\\)\\1",
+          "captures": {
+            "2": {
+              "patterns": [
+                {
+                  "include": "#markdown-inline"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "markup.strikethrough.rust",
+          "match": "(?<!\\\\)~~([^~]+?)(?<!\\\\)~~",
+          "captures": {
+            "1": {
+              "patterns": [
+                {
+                  "include": "#markdown-inline"
+                }
+              ]
+            }
+          }
         }
       ]
     },

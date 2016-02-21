@@ -3,15 +3,38 @@
 /* Default colors have been selected to style well with the One Dark theme */
 .define-default() {
   @syntax-text-color: hsl(220, 14%, 71%);
+  @syntax-background-color: hsl(220, 13%, 18%);
 }
 .define-default();
 
 /* Note that these colors should take precedence over themes */
 @syntax-color-attribute: mix(@syntax-text-color, #806040, 50%);
-@syntax-color-documentation: desaturate(darken(@syntax-text-color, 35%), 5%);
+@syntax-color-documentation: mix(
+  @syntax-text-color, @syntax-background-color, 41%
+);
 @syntax-color-lifetime: mix(@syntax-text-color, #e7007d, 50%);
 @syntax-color-macro: mix(@syntax-text-color, #00f0ff, 50%);
 @syntax-color-parameter: mix(@syntax-text-color, #2255bb, 50%);
+
+/**
+ * Blends text with respect to the main background color.
+ *
+ * @color  The color to blend
+ * @weight Percentage of the color to blend with the background
+ */
+.blend-text(@color, @weight) {
+  color: mix(@color, @syntax-background-color, @weight);
+}
+
+/**
+ * Rough lightness inversion of text with respect to the main background color.
+ *
+ * @color  The color to invert
+ * @weight Percentage of the inverted color mixed with the background
+ */
+.invert-text(@color, @weight) {
+  color: mix(spin((#fff - @color), 180), @syntax-background-color, @weight);
+}
 
 atom-text-editor::shadow .source.rust {
 
@@ -34,45 +57,48 @@ atom-text-editor::shadow .source.rust {
   }
 
   .markup {
-    color: @syntax-color-documentation;
-    font-style: normal;
-    font-weight: normal;
+    color: inherit;
+    font-style: inherit;
+    font-weight: inherit;
     &.bold {
       font-weight: bold;
     }
     &.definition {
-      background-color: fadeout(@syntax-color-documentation, 93%);
-      border: 1px solid fadeout(@syntax-color-documentation, 93%);
+      .blend-text(@syntax-color-documentation, 60%);
+      @bg-color: mix(
+        @syntax-color-documentation, @syntax-background-color, 14%
+      );
+      background-color: @bg-color;
+      border: 1px solid @bg-color;
       border-radius: 1px;
-      color: fadeout(@syntax-color-documentation, 6%);
     }
     &.heading {
-      color: lighten(@syntax-color-documentation, 16%);
+      .invert-text(@syntax-color-documentation, 87%);
       font-weight: bold;
     }
     &.italic {
       font-style: italic;
     }
     &.link-text {
-      color: lighten(@syntax-color-documentation, 11%);
+      .invert-text(@syntax-color-documentation, 72%);
     }
     &.link-url {
-      color: fadeout(@syntax-color-documentation, 3%);
+      .blend-text(@syntax-color-documentation, 60%);
       text-decoration: underline;
     }
     &.quote {
-      color: fadeout(@syntax-color-documentation, 6%);
+      .blend-text(@syntax-color-documentation, 60%);
       font-style: italic;
     }
     &.strikethrough {
-      color: fadeout(@syntax-color-documentation, 8%);
+      .blend-text(@syntax-color-documentation, 55%);
       text-decoration: line-through;
     }
     &.raw {
-      color: lighten(@syntax-color-documentation, 11%);
+      .invert-text(@syntax-color-documentation, 92%);
     }
     &.symbol {
-      color: lighten(@syntax-color-documentation, 10%);
+      .invert-text(@syntax-color-documentation, 78%);
       font-weight: bold;
     }
   }

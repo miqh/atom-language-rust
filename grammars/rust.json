@@ -58,8 +58,141 @@
           "match": "//(?![/!]).*"
         },
         {
+          "name": "comment.block.rust",
+          "begin": "/\\*(?![*!])",
+          "end": "\\*/"
+        },
+        {
           "name": "comment.block.documentation.rust",
-          "begin": "^\\s*(//[/!])",
+          "begin": "(/\\*[*!])",
+          "beginCaptures": {
+            "1": {
+              "name": "markup.definition.rust"
+            }
+          },
+          "end": "(\\*/)",
+          "endCaptures": {
+            "1": {
+              "name": "markup.definition.rust"
+            }
+          },
+          "patterns": [
+            {
+              "match": "(?m)^\\s*(\\*)\\s+(#.+)",
+              "captures": {
+                "1": {
+                  "name": "markup.definition.rust"
+                },
+                "2": {
+                  "name": "markup.heading.rust"
+                }
+              }
+            },
+            {
+              "name": "markup.list.unnumbered.rust",
+              "match": "(?m)^\\s*(\\*)\\s+([*+\\-])\\s+(?=\\S)(.+)",
+              "captures": {
+                "1": {
+                  "name": "markup.definition.rust"
+                },
+                "2": {
+                  "name": "markup.symbol.rust"
+                },
+                "3": {
+                  "patterns": [
+                    {
+                      "include": "#markdown-inline"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "markup.list.numbered.rust",
+              "match": "(?m)^\\s*(\\*)\\s+(\\d+\\.)\\s+(?=\\S)(.+)",
+              "captures": {
+                "1": {
+                  "name": "markup.definition.rust"
+                },
+                "2": {
+                  "name": "markup.symbol.rust"
+                },
+                "3": {
+                  "patterns": [
+                    {
+                      "include": "#markdown-inline"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "match": "(?m)^\\s*(\\*)\\s+(>)(.+)",
+              "captures": {
+                "1": {
+                  "name": "markup.definition.rust"
+                },
+                "2": {
+                  "name": "markup.symbol.rust"
+                },
+                "3": {
+                  "name": "markup.quote.rust"
+                }
+              }
+            },
+            {
+              "begin": "(?m)^\\s*(\\*)\\s+(```)(.*)",
+              "end": "(```)",
+              "beginCaptures": {
+                "1": {
+                  "name": "markup.definition.rust"
+                },
+                "2": {
+                  "name": "markup.symbol.rust"
+                },
+                "3": {
+                  "name": "markup.raw.block.rust"
+                }
+              },
+              "endCaptures": {
+                "1": {
+                  "name": "markup.symbol.rust"
+                }
+              },
+              "patterns": [
+                {
+                  "match": "(\\*)\\s+([^`]*)",
+                  "captures": {
+                    "1": {
+                      "name": "markup.definition.rust"
+                    },
+                    "2": {
+                      "name": "markup.raw.block.rust"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "match": "(\\*)\\s+(.+)",
+              "captures": {
+                "1": {
+                  "name": "markup.definition.rust"
+                },
+                "2": {
+                  "patterns": [
+                    {
+                      "include": "#markdown-inline"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "comment.block.documentation.rust",
+          "begin": "(//[/!])",
           "beginCaptures": {
             "1": {
               "name": "markup.definition.rust"
@@ -153,41 +286,6 @@
               "match": "(//[/!])"
             }
           ]
-        },
-        {
-          "name": "comment.block.rust",
-          "begin": "/\\*(?![\\*!])",
-          "end": "\\*/"
-        },
-        {
-          "name": "comment.block.doc.inner.rust",
-          "begin": "/\\*!\\s*(.*)",
-          "end": "\\*/",
-          "captures": {
-            "1": {
-              "name": "meta.doc.rust",
-              "patterns": [
-                {
-                  "include": "#markdown"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "name": "comment.block.doc.outer.rust",
-          "begin": "/\\*\\*\\s*(.*)",
-          "end": "\\*/",
-          "captures": {
-            "1": {
-              "name": "meta.doc.rust",
-              "patterns": [
-                {
-                  "include": "#markdown"
-                }
-              ]
-            }
-          }
         }
       ]
     },
@@ -445,16 +543,6 @@
         {
           "name": "variable.other.macro-substitution.rust",
           "match": "\\$\\w+"
-        }
-      ]
-    },
-    "markdown": {
-      "patterns": [
-        {
-          "comment": "will need custom styling for clarity",
-          "disabled": true,
-          "name": "source.gfm",
-          "include": "source.gfm"
         }
       ]
     },

@@ -78,19 +78,24 @@
           },
           "patterns": [
             {
-              "match": "(?m)^\\s*(\\*)\\s+(#.+)",
+              "match": "(?m)^\\s*(\\*)\\s+(#(?:[^*\\$]+|\\*(?!\\/))+)",
               "captures": {
                 "1": {
                   "name": "markup.definition.rust"
                 },
                 "2": {
-                  "name": "markup.heading.rust"
+                  "name": "markup.heading.rust",
+                  "patterns": [
+                    {
+                      "include": "#markdown-inline"
+                    }
+                  ]
                 }
               }
             },
             {
               "name": "markup.list.unnumbered.rust",
-              "match": "(?m)^\\s*(\\*)\\s+([*+\\-])\\s+(?=\\S)(.+)",
+              "match": "(?m)^\\s*(\\*)\\s+([*+\\-])\\s+(?=\\S)((?:[^*\\$]+|\\*(?!\\/))+)",
               "captures": {
                 "1": {
                   "name": "markup.definition.rust"
@@ -109,7 +114,7 @@
             },
             {
               "name": "markup.list.numbered.rust",
-              "match": "(?m)^\\s*(\\*)\\s+(\\d+\\.)\\s+(?=\\S)(.+)",
+              "match": "(?m)^\\s*(\\*)\\s+(\\d+\\.)\\s+(?=\\S)((?:[^*\\$]+|\\*(?!\\/))+)",
               "captures": {
                 "1": {
                   "name": "markup.definition.rust"
@@ -127,7 +132,7 @@
               }
             },
             {
-              "match": "(?m)^\\s*(\\*)\\s+(>)(.+)",
+              "match": "(?m)^\\s*(\\*)\\s+(>)((?:[^*\\$]+|\\*(?!\\/))+)",
               "captures": {
                 "1": {
                   "name": "markup.definition.rust"
@@ -141,8 +146,9 @@
               }
             },
             {
-              "begin": "(?m)^\\s*(\\*)\\s+(```)(.*)",
-              "end": "(```)",
+              "comment": "unterminated raw blocks must not leak",
+              "begin": "(?m)^\\s*(\\*)\\s+(```)((?:[^*\\$]+|\\*(?!\\/))*)",
+              "end": "(```)|(?=\\*/)",
               "beginCaptures": {
                 "1": {
                   "name": "markup.definition.rust"
@@ -161,7 +167,7 @@
               },
               "patterns": [
                 {
-                  "match": "(\\*)\\s+([^`]*)",
+                  "match": "(\\*)\\s+((?:[^*`\\$]+|\\*(?!\\/)|`(?!``))*)",
                   "captures": {
                     "1": {
                       "name": "markup.definition.rust"
@@ -174,7 +180,7 @@
               ]
             },
             {
-              "match": "(\\*)\\s+(.+)",
+              "match": "(\\*)\\s+((?:[^*\\$]+|\\*(?!\\/))+)",
               "captures": {
                 "1": {
                   "name": "markup.definition.rust"
@@ -198,24 +204,35 @@
               "name": "markup.definition.rust"
             }
           },
-          "end": "(?=^\\s*(?!//[/!]))",
+          "end": "(?m)^(?!\\s*//[/!])",
           "patterns": [
             {
-              "match": "(?<=//[/!])\\s*(#.+)",
+              "match": "(?m)^\\s*(//[/!])\\s*(#.+)",
               "captures": {
                 "1": {
-                  "name": "markup.heading.rust"
+                  "name": "markup.definition.rust"
+                },
+                "2": {
+                  "name": "markup.heading.rust",
+                  "patterns": [
+                    {
+                      "include": "#markdown-inline"
+                    }
+                  ]
                 }
               }
             },
             {
               "name": "markup.list.unnumbered.rust",
-              "match": "(?<=//[/!])\\s*([*+\\-])(?=\\s)(.*)",
+              "match": "(?m)^\\s*(//[/!])\\s*([*+\\-])(?=\\s)(.*)",
               "captures": {
                 "1": {
-                  "name": "markup.symbol.rust"
+                  "name": "markup.definition.rust"
                 },
                 "2": {
+                  "name": "markup.symbol.rust"
+                },
+                "3": {
                   "patterns": [
                     {
                       "include": "#markdown-inline"
@@ -226,12 +243,15 @@
             },
             {
               "name": "markup.list.numbered.rust",
-              "match": "(?<=//[/!])\\s*(\\d+\\.)(?=\\s)(.*)",
+              "match": "(?m)^\\s*(//[/!])\\s*(\\d+\\.)(?=\\s)(.*)",
               "captures": {
                 "1": {
-                  "name": "markup.symbol.rust"
+                  "name": "markup.definition.rust"
                 },
                 "2": {
+                  "name": "markup.symbol.rust"
+                },
+                "3": {
                   "patterns": [
                     {
                       "include": "#markdown-inline"
@@ -241,22 +261,32 @@
               }
             },
             {
-              "match": "(?<=//[/!])\\s*(>)(.*)",
+              "match": "(?m)^\\s*(//[/!])\\s*(>)(.*)",
               "captures": {
                 "1": {
-                  "name": "markup.symbol.rust"
+                  "name": "markup.definition.rust"
                 },
                 "2": {
+                  "name": "markup.symbol.rust"
+                },
+                "3": {
                   "name": "markup.quote.rust"
                 }
               }
             },
             {
-              "begin": "(?<=//[/!])\\s*(```)",
-              "end": "(```)",
+              "comment": "unterminated raw blocks must not leak",
+              "begin": "(?m)^\\s*(//[/!])\\s*(```)(.*)",
+              "end": "(```)|(?m)^(?!\\s*//[/!])",
               "beginCaptures": {
                 "1": {
+                  "name": "markup.definition.rust"
+                },
+                "2": {
                   "name": "markup.symbol.rust"
+                },
+                "3": {
+                  "name": "markup.raw.block.rust"
                 }
               },
               "endCaptures": {
@@ -266,7 +296,7 @@
               },
               "patterns": [
                 {
-                  "match": "(//[/!])\\s*([^`]*)",
+                  "match": "(?m)^\\s*(//[/!])\\s*((?:[^`\\$]+|`(?!``))*)",
                   "captures": {
                     "1": {
                       "name": "markup.definition.rust"
@@ -279,11 +309,19 @@
               ]
             },
             {
-              "include": "#markdown-inline"
-            },
-            {
-              "name": "markup.definition.rust",
-              "match": "(//[/!])"
+              "match": "(?m)^\\s*(//[/!])\\s*(.+)",
+              "captures": {
+                "1": {
+                  "name": "markup.definition.rust"
+                },
+                "2": {
+                  "patterns": [
+                    {
+                      "include": "#markdown-inline"
+                    }
+                  ]
+                }
+              }
             }
           ]
         }

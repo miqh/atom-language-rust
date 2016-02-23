@@ -1031,23 +1031,15 @@
       "patterns" : [
         {
           "name": "storage.type.primitive.rust",
-          "match": "\\b(?:[iu](?:8|16|32|64|size)|f(?:32|64)|char|bool)\\b"
+          "match": "\\bbool|(?<!:)(?:[iu](?:8|16|32|64|size)|f(?:32|64)|char|str)(?!:)\\b"
         },
         {
           "name": "storage.type.self.rust",
           "match": "\\b[sS]elf\\b"
         },
         {
-          "name": "storage.type.raw-pointer.rust",
-          "match": "\\*(?:const|mut)\\s+\\w+"
-        },
-        {
-          "name": "storage.type.rust",
-          "match": "\\b(?:String|str)\\b"
-        },
-        {
           "name": "storage.type.unsized.rust",
-          "match": "\\?Sized\\b"
+          "match": "\\b\\?Sized\\b"
         },
         {
           "name": "storage.type.rust",

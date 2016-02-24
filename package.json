@@ -1,9 +1,14 @@
 {
   "name": "atom-language-rust",
   "version": "0.4.0",
-  "description": "Complete Rust language support in Atom",
+  "description": "Rust language grammar with custom enhancements",
   "author": "Michael Huynh <miqid@outlook.com> (https://github.com/miqid)",
-  "keywords": ["rust", "grammar", "language", "syntax"],
+  "keywords": [
+    "rust",
+    "grammar",
+    "language",
+    "syntax"
+  ],
   "repository": "https://github.com/miqid/atom-language-rust",
   "homepage": "https://atom.io/packages/atom-language-rust",
   "bugs": {
@@ -13,5 +18,8 @@
   "main": "./index.js",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^2.2.0"
   }
 }

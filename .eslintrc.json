@@ -1,0 +1,20 @@
+{
+  "env": {
+    "atomtest": true,
+    "es6": true,
+    "jasmine": true
+  },
+  "extends": "eslint:recommended",
+  "globals": {
+    "atom": false
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
+  "rules": {
+    "indent": [2, 2],
+    "quotes": [2, "single", "avoid-escape"],
+    "semi": [2, "always"]
+  }
+}

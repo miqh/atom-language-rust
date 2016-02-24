@@ -2,4 +2,4 @@
 
 import Rust from './lib/rust';
 
-module.exports = new Rust;
+export default new Rust;

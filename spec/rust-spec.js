@@ -65,7 +65,7 @@ describe('atom-language-rust', () => {
     });
     it('should detect trailing one-line comments', () => {
       let tokens = grammar.tokenizeLines(
-        `#[test] // foo`
+        '#[test] // foo'
       );
       expect(tokens[0][0]).toEqual({
         scopes: ['source.rust', 'meta.attribute.outer.rust'],
@@ -79,13 +79,13 @@ describe('atom-language-rust', () => {
         scopes: ['source.rust', 'comment.line.rust'],
         value: '// foo'
       });
-    })
+    });
   });
 
   describe('when tokenizing byte literals', () => {
     it('should detect a unicode value as invalid', () => {
       let tokens = grammar.tokenizeLines(
-        `b'Δ'`
+        "b'Δ'"
       );
       expect(tokens[0][1]).toEqual({
         scopes: [
@@ -98,7 +98,7 @@ describe('atom-language-rust', () => {
     });
     it('should detect extra characters as invalid', () => {
       let tokens = grammar.tokenizeLines(
-        `b'foo'`
+        "b'foo'"
       );
       expect(tokens[0][1]).toEqual({
         scopes: [
@@ -111,7 +111,7 @@ describe('atom-language-rust', () => {
     });
     it('should detect an unsupported escape as invalid', () => {
       let tokens = grammar.tokenizeLines(
-        `b'\\a'`
+        "b'\\a'"
       );
       expect(tokens[0][1]).toEqual({
         scopes: [
@@ -124,7 +124,7 @@ describe('atom-language-rust', () => {
     });
     it('should detect an unescaped quote as invalid', () => {
       let tokens = grammar.tokenizeLines(
-        `b'''`
+        "b'''"
       );
       expect(tokens[0][1]).toEqual({
         scopes: [
@@ -149,7 +149,7 @@ describe('atom-language-rust', () => {
           'string.quoted.single.character.rust',
           'invalid.illegal.rust'
         ],
-        value: `\\xff`
+        value: '\\xff'
       });
       expect(tokens[1][2]).toEqual({
         scopes: [
@@ -157,7 +157,7 @@ describe('atom-language-rust', () => {
           'string.quoted.single.character.rust',
           'invalid.illegal.rust'
         ],
-        value: `\\xyz`
+        value: '\\xyz'
       });
     });
     it('should detect bad unicode escapes as invalid', () => {
@@ -171,7 +171,7 @@ describe('atom-language-rust', () => {
           'string.quoted.single.character.rust',
           'invalid.illegal.rust'
         ],
-        value: `\\u{110000}`
+        value: '\\u{110000}'
       });
       expect(tokens[1][2]).toEqual({
         scopes: [
@@ -179,12 +179,12 @@ describe('atom-language-rust', () => {
           'string.quoted.single.character.rust',
           'invalid.illegal.rust'
         ],
-        value: `\\u{foo}`
+        value: '\\u{foo}'
       });
     });
     it('should detect extra characters as invalid', () => {
       let tokens = grammar.tokenizeLines(
-        `'foo'`
+        "'foo'"
       );
       expect(tokens[0][1]).toEqual({
         scopes: [
@@ -197,7 +197,7 @@ describe('atom-language-rust', () => {
     });
     it('should detect an unsupported escape as invalid', () => {
       let tokens = grammar.tokenizeLines(
-        `'\\a'`
+        "'\\a'"
       );
       expect(tokens[0][1]).toEqual({
         scopes: [
@@ -210,7 +210,7 @@ describe('atom-language-rust', () => {
     });
     it('should detect an unescaped quote as invalid', () => {
       let tokens = grammar.tokenizeLines(
-        `'''`
+        "'''"
       );
       expect(tokens[0][1]).toEqual({
         scopes: [

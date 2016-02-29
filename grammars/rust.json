@@ -198,7 +198,7 @@
         },
         {
           "name": "comment.block.documentation.rust",
-          "begin": "(//[/!])",
+          "begin": "(?=//[/!])",
           "beginCaptures": {
             "1": {
               "name": "markup.definition.rust"
@@ -309,7 +309,7 @@
               ]
             },
             {
-              "match": "(?m)^\\s*(//[/!])\\s*(.+)",
+              "match": "(//[/!])\\s*(.+)?",
               "captures": {
                 "1": {
                   "name": "markup.definition.rust"

@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning][].
 
+## [0.5.0][] - 2016-03-05
+
+## Adds
+- ESLint configuration for the project.
+
+## Changes
+- Primitive type matching to be ignored when part of a path.
+- Grammar scope assigned to `self` and `Self`.
+
+### Fixes
+- A reported package activation error (#1).
+- Leading documentation block lines not having Markdown constructs matched.
+- Linting errors resulting from ESLint configuration.
+
+## Removes
+- Matching for `String`, raw pointers and lambda expressions.
+
 ## [0.4.0][] - 2016-02-21
 
 ### Adds
@@ -45,6 +62,7 @@ This project adheres to [Semantic Versioning][].
 ### Adds
 - Initial project files.
 
+[0.5.0]: https://github.com/miqid/atom-language-rust/compare/0.4.0...0.5.0
 [0.4.0]: https://github.com/miqid/atom-language-rust/compare/0.3.0...0.4.0
 [0.3.0]: https://github.com/miqid/atom-language-rust/compare/0.2.0...0.3.0
 [0.2.0]: https://github.com/miqid/atom-language-rust/compare/0.1.0...0.2.0

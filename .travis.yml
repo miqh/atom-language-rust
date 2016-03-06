@@ -3,9 +3,6 @@ language: objective-c
 git:
   depth: 1
 
-env:
-  - APM_TEST_PACKAGES="eslint"
-
 script: 'curl -s https://raw.githubusercontent.com/atom/ci/master/build-package.sh | sh'
 
 notifications:

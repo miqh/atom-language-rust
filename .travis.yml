@@ -1,8 +1,5 @@
 language: objective-c
 
-git:
-  depth: 1
-
 script: 'curl -s https://raw.githubusercontent.com/atom/ci/master/build-package.sh | sh'
 
 notifications:

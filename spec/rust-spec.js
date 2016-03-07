@@ -223,4 +223,54 @@ describe('atom-language-rust', () => {
     });
   });
 
+  describe('when tokenizing primitive casts', () => {
+    it('should detect the as keyword', () => {
+      let tokens = grammar.tokenizeLines(
+        'foo as u32'
+      );
+      expect(tokens[0][1]).toEqual({
+        scopes: [
+          'source.rust',
+          'keyword.other.rust'
+        ],
+        value: 'as'
+      });
+    });
+  });
+
+  describe('when tokenizing use statements', () => {
+    it('should detect the use keyword', () => {
+      let tokens = grammar.tokenizeLines(
+        'use foo;'
+      );
+      expect(tokens[0][0]).toEqual({
+        scopes: [
+          'source.rust',
+          'keyword.other.rust'
+        ],
+        value: 'use'
+      });
+    });
+    it('should detect the as keyword', () => {
+      let tokens = grammar.tokenizeLines(
+        `use foo as bar;
+        use baz::{qux as quux};`
+      );
+      expect(tokens[0][2]).toEqual({
+        scopes: [
+          'source.rust',
+          'keyword.other.rust'
+        ],
+        value: 'as'
+      });
+      expect(tokens[1][3]).toEqual({
+        scopes: [
+          'source.rust',
+          'keyword.other.rust'
+        ],
+        value: 'as'
+      });
+    });
+  });
+
 });

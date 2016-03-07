@@ -47,10 +47,6 @@
       "name": "constant.language.boolean.rust",
       "match": "\\b(?:true|false)\\b"
     },
-    "casts": {
-      "name": "keyword.other.cast.rust",
-      "match": "\\bas\\b"
-    },
     "comments": {
       "patterns": [
         {
@@ -462,6 +458,11 @@
         }
       ]
     },
+    "keyword-as": {
+      "comment": "casts and use statement aliases",
+      "name": "keyword.other.rust",
+      "match": "\\bas\\b"
+    },
     "labels": {
       "name": "variable.other.label.rust",
       "match": "'\\w+(?=\\s*:\\s*(?:for|loop|while))"
@@ -489,14 +490,19 @@
           "match": "\\bsuper\\b"
         },
         {
-          "comment": "suppress textual matches",
+          "comment": "use statements",
           "begin": "\\b(use)\\b",
           "end": ";",
           "captures": {
             "1": {
               "name": "keyword.other.rust"
             }
-          }
+          },
+          "patterns": [
+            {
+              "include": "#keyword-as"
+            }
+          ]
         }
       ]
     },
@@ -554,7 +560,7 @@
                   }
                 },
                 {
-                  "include": "#casts"
+                  "include": "#keyword-as"
                 },
                 {
                   "include": "#flow"
@@ -1056,7 +1062,7 @@
       "include": "#macros"
     },
     {
-      "include": "#casts"
+      "include": "#keyword-as"
     },
     {
       "include": "#enumerations"

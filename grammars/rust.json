@@ -483,11 +483,21 @@
       "patterns": [
         {
           "name": "keyword.other.rust",
-          "match": "\\b(?:crate|extern|pub|mod)\\b"
+          "match": "\\b(?:crate|extern|pub)\\b"
         },
         {
           "name": "variable.language.super.rust",
           "match": "\\bsuper\\b"
+        },
+        {
+          "comment": "module declarations and definitions",
+          "begin": "\\b(mod)\\b",
+          "end": "[;{]",
+          "captures": {
+            "1": {
+              "name": "keyword.other.rust"
+            }
+          }
         },
         {
           "comment": "use statements",

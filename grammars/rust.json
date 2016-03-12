@@ -373,19 +373,7 @@
           "match": "<|>"
         },
         {
-          "begin": "\\b(where)\\s+",
-          "end": "(?=\\s*[{;])",
-          "beginCaptures": {
-            "1": {
-              "name": "keyword.other.rust"
-            }
-          },
-          "patterns": [
-            {
-              "name": "variable.parameter.rust",
-              "match": "(\\w++)(?=\\s*:(?!:))"
-            }
-          ]
+          "include": "#keyword-where"
         },
         {
           "include": "#common"
@@ -458,10 +446,67 @@
         }
       ]
     },
+    "implementations": {
+      "comment": "implementation definition",
+      "name": "meta.implementation.rust",
+      "begin": "\\b(impl)\\b",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.other.implementation.rust"
+        }
+      },
+      "end": "(?=\\s*\\{)",
+      "patterns": [
+        {
+          "include": "#type-parameters"
+        },
+        {
+          "comment": "implementation target",
+          "begin": "(?<=\\s)(for)\\s+",
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.other.rust"
+            }
+          },
+          "end": "(?=\\s*(?:\\{|where))",
+          "patterns": [
+            {
+              "include": "#type-parameters"
+            },
+            {
+              "include": "#common"
+            }
+          ]
+        },
+        {
+          "include": "#keyword-where"
+        },
+        {
+          "comment": "unsemantic scope but provides style consistency",
+          "name": "entity.name.type.rust",
+          "match": "\\w+(?=[<\\s])"
+        }
+      ]
+    },
     "keyword-as": {
       "comment": "casts and use statement aliases",
       "name": "keyword.other.rust",
       "match": "\\bas\\b"
+    },
+    "keyword-where": {
+      "begin": "(?<=\\s)(where)\\s+",
+      "end": "(?=\\s*[{;])",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.other.rust"
+        }
+      },
+      "patterns": [
+        {
+          "name": "variable.parameter.rust",
+          "match": "(\\w++)(?=\\s*:(?!:))"
+        }
+      ]
     },
     "labels": {
       "name": "variable.other.label.rust",
@@ -1050,6 +1095,30 @@
           "match": "\\btype\\b"
         }
       ]
+    },
+    "type-parameters": {
+      "name": "meta.type-parameters.rust",
+      "begin": "(<)",
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.symbol.rust"
+        }
+      },
+      "end": "(>)",
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.symbol.rust"
+        }
+      },
+      "patterns": [
+        {
+          "comment": "recursively match for type parameter groups",
+          "include": "#type-parameters"
+        },
+        {
+          "include": "#common"
+        }
+      ]
     }
   },
   "patterns": [
@@ -1079,6 +1148,9 @@
     },
     {
       "include": "#functions"
+    },
+    {
+      "include": "#implementations"
     },
     {
       "include": "#linkage"

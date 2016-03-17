@@ -369,14 +369,19 @@
     "definitions-common": {
       "patterns": [
         {
-          "comment": "suppress comparison tokens",
-          "match": "<|>"
-        },
-        {
           "include": "#keyword-where"
         },
         {
-          "include": "#common"
+          "include": "#lifetimes"
+        },
+        {
+          "include": "#modifiers"
+        },
+        {
+          "include": "#tokens"
+        },
+        {
+          "include": "#types"
         }
       ]
     },
@@ -762,6 +767,19 @@
         }
       ]
     },
+    "modifiers": {
+      "patterns": [
+        {
+          "name": "storage.modifier.rust",
+          "match": "\\b(?:mut|pub|extern|unsafe|move)\\b"
+        },
+        {
+          "comment": "RFC #469: feature gated",
+          "name": "storage.modifier.rust",
+          "match": "\\bbox\\b"
+        }
+      ]
+    },
     "numbers": {
       "patterns": [
         {
@@ -978,25 +996,27 @@
     },
     "structures": {
       "comment": "struct definition",
-      "name": "meta.structure.rust",
-      "begin": "(?=struct\\s+\\w+)",
+      "name": "meta.struct.rust",
+      "begin": "\\b(struct)\\s+",
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.rust"
+        }
+      },
       "end": "(?=\\s*[{;])",
       "patterns": [
         {
-          "begin": "(?=struct)",
-          "end": "(?=\\s*[<({;])",
-          "patterns": [
-            {
-              "include": "#definitions"
-            },
-            {
-              "name": "entity.name.type.struct.rust",
-              "match": "(?>\\b[_a-zA-Z][_a-zA-Z0-9]*)"
-            }
-          ]
+          "include": "#type-parameters"
         },
         {
-          "include": "#definitions-common"
+          "include": "#tuple-parameters"
+        },
+        {
+          "include": "#keyword-where"
+        },
+        {
+          "name": "entity.name.type.struct.rust",
+          "match": "([_a-zA-Z]\\w*)"
         }
       ]
     },
@@ -1096,6 +1116,30 @@
         }
       ]
     },
+    "tuple-parameters": {
+      "name": "meta.tuple-parameters.rust",
+      "begin": "(\\()",
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.symbol.rust"
+        }
+      },
+      "end": "(\\))",
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.symbol.rust"
+        }
+      },
+      "patterns": [
+        {
+          "comment": "recursively match for tuple parameter groups",
+          "include": "#tuple-parameters"
+        },
+        {
+          "include": "#definitions-common"
+        }
+      ]
+    },
     "type-parameters": {
       "name": "meta.type-parameters.rust",
       "begin": "(<)",
@@ -1116,7 +1160,7 @@
           "include": "#type-parameters"
         },
         {
-          "include": "#common"
+          "include": "#definitions-common"
         }
       ]
     }

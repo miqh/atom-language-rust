@@ -453,11 +453,11 @@
     },
     "implementations": {
       "comment": "implementation definition",
-      "name": "meta.implementation.rust",
+      "name": "meta.impl.rust",
       "begin": "\\b(impl)\\b",
       "beginCaptures": {
         "1": {
-          "name": "keyword.other.implementation.rust"
+          "name": "keyword.other.rust"
         }
       },
       "end": "(?=\\s*\\{)",
@@ -466,30 +466,40 @@
           "include": "#type-parameters"
         },
         {
-          "comment": "implementation target",
-          "begin": "(?<=\\s)(for)\\s+",
+          "begin": "\\b([_a-zA-Z]\\w*)(?=[\\s<{])",
           "beginCaptures": {
             "1": {
-              "name": "keyword.other.rust"
+              "comment": "unsemantic scope but provides style consistency",
+              "name": "entity.name.type.impl.rust"
             }
           },
-          "end": "(?=\\s*(?:\\{|where))",
+          "end": "(?=\\s*\\{)",
           "patterns": [
             {
               "include": "#type-parameters"
             },
             {
-              "include": "#common"
+              "comment": "implementation target",
+              "begin": "\\b(for)\\s+",
+              "beginCaptures": {
+                "1": {
+                  "name": "keyword.other.rust"
+                }
+              },
+              "end": "(?=\\s*(?:\\{|where))",
+              "patterns": [
+                {
+                  "include": "#type-parameters"
+                },
+                {
+                  "include": "#definitions-common"
+                }
+              ]
+            },
+            {
+              "include": "#keyword-where"
             }
           ]
-        },
-        {
-          "include": "#keyword-where"
-        },
-        {
-          "comment": "unsemantic scope but provides style consistency",
-          "name": "entity.name.type.rust",
-          "match": "\\w+(?=[<\\s])"
         }
       ]
     },

@@ -1085,24 +1085,33 @@
     "traits": {
       "comment": "trait definition",
       "name": "meta.trait.rust",
-      "begin": "(?=trait\\s+\\w+)",
-      "end": "(?=\\s*[{;])",
+      "begin": "\\b(trait)\\b",
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.rust"
+        }
+      },
+      "end": "(?=\\s*\\{)",
       "patterns": [
         {
-          "begin": "(?=trait)",
-          "end": "(?=\\s*[<({;])",
-          "patterns": [
-            {
-              "include": "#definitions"
-            },
-            {
-              "name": "entity.name.type.trait.rust",
-              "match": "(?>\\b[_a-zA-Z][_a-zA-Z0-9]*)"
-            }
-          ]
+          "include": "#type-parameters"
         },
         {
-          "include": "#definitions-common"
+          "begin": "(?:\\b([_a-zA-Z]\\w*)|\\[.*\\])(?=[\\s<{]|:(?!:))",
+          "beginCaptures": {
+            "1": {
+              "name": "entity.name.type.trait.rust"
+            }
+          },
+          "end": "(?=\\s*\\{)",
+          "patterns": [
+            {
+              "include": "#type-parameters"
+            },
+            {
+              "include": "#keyword-where"
+            }
+          ]
         }
       ]
     },

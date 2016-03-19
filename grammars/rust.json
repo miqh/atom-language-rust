@@ -466,7 +466,7 @@
           "include": "#type-parameters"
         },
         {
-          "begin": "\\b([_a-zA-Z]\\w*)(?=[\\s<{])",
+          "begin": "(?:\\b([_a-zA-Z]\\w*)|\\[.*\\])(?=[\\s<{])",
           "beginCaptures": {
             "1": {
               "comment": "unsemantic scope but provides style consistency",

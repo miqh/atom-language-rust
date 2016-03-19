@@ -784,6 +784,11 @@
           "match": "\\b(?:mut|pub|extern|unsafe|move)\\b"
         },
         {
+          "comment": "raw pointer",
+          "name": "storage.modifier.rust",
+          "match": "\\bconst\\b"
+        },
+        {
           "comment": "RFC #469: feature gated",
           "name": "storage.modifier.rust",
           "match": "\\bbox\\b"

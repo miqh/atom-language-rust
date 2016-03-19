@@ -416,38 +416,74 @@
     "functions": {
       "comment": "function definition",
       "name": "meta.function.rust",
-      "begin": "(?=fn\\s+\\w+)",
-      "end": "(?=\\s*[{;])",
+      "begin": "\\b(fn)\\b",
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.rust"
+        }
+      },
+      "end": "(?=\\s*[{;,}])",
       "patterns": [
         {
-          "begin": "(?=fn)",
-          "end": "(?=\\s*[<(])",
+          "comment": "function type (unnamed)",
+          "begin": "(?=\\()",
+          "end": "(?=\\s*[{;,}])",
           "patterns": [
             {
-              "include": "#definitions"
+              "include": "#function-parameters"
             },
             {
-              "name": "entity.name.function.rust",
-              "match": "(?>\\b[_a-zA-Z][_a-zA-Z0-9]*)"
+              "include": "#definitions-common"
             }
           ]
         },
         {
-          "begin": "\\(",
-          "end": "(?=\\s*(?:where|->|[{;]))",
+          "comment": "named function",
+          "begin": "\\b([_a-zA-Z]\\w*)(?=[\\s<(])",
+          "beginCaptures": {
+            "1": {
+              "name": "entity.name.function.rust"
+            }
+          },
+          "end": "(?=\\s*[{;])",
           "patterns": [
             {
-              "comment": "function parameters",
-              "name": "variable.parameter.rust",
-              "match": "(\\w++)(?=\\s*:(?!:))"
+              "include": "#type-parameters"
             },
             {
-              "include": "#common"
+              "include": "#keyword-where"
+            },
+            {
+              "include": "#function-parameters"
+            },
+            {
+              "include": "#definitions-common"
             }
           ]
-        },
+        }
+      ]
+    },
+    "function-parameters": {
+      "name": "meta.function-parameters.rust",
+      "begin": "(\\()",
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.symbol.rust"
+        }
+      },
+      "end": "(\\))",
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.symbol.rust"
+        }
+      },
+      "patterns": [
         {
           "include": "#definitions-common"
+        },
+        {
+          "name": "variable.parameter.rust",
+          "match": "([_a-zA-Z]\\w*)(?=\\s*:(?!:))"
         }
       ]
     },

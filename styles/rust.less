@@ -40,6 +40,9 @@ atom-text-editor::shadow .source.rust {
 
   .attribute {
     color: @syntax-color-attribute;
+    .string {
+      .blend-text(@syntax-color-attribute, 60%);
+    }
   }
 
   .documentation {

@@ -6,36 +6,17 @@
     "attributes": {
       "patterns": [
         {
-          "name": "meta.attribute.inner.rust",
-          "begin": "#\\s*!\\s*\\[",
+          "name": "meta.attribute.rust",
+          "begin": "#\\s*!?\\s*\\[",
           "end": "\\]",
           "patterns": [
             {
-              "include": "#attributes-common"
+              "comment": "attribute literal",
+              "name": "string.quoted.double.rust",
+              "begin": "\"",
+              "end": "(?<!\\\\)\""
             }
           ]
-        },
-        {
-          "name": "meta.attribute.outer.rust",
-          "begin": "#\\s*\\[",
-          "end": "\\]",
-          "patterns": [
-            {
-              "include": "#attributes-common"
-            }
-          ]
-        }
-      ]
-    },
-    "attributes-common": {
-      "comment": "sub-attributes",
-      "begin": "\\(",
-      "end": "\\)",
-      "patterns": [
-        {
-          "comment": "attribute value",
-          "begin": "\"",
-          "end": "(?<!\\\\)\""
         }
       ]
     },

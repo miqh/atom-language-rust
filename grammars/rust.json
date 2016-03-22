@@ -31,15 +31,6 @@
     "comments": {
       "patterns": [
         {
-          "name": "comment.line.rust",
-          "match": "//(?![/!]).*"
-        },
-        {
-          "name": "comment.block.rust",
-          "begin": "/\\*(?![*!])",
-          "end": "\\*/"
-        },
-        {
           "name": "comment.block.documentation.rust",
           "begin": "(/\\*[*!])",
           "beginCaptures": {
@@ -174,8 +165,8 @@
           ]
         },
         {
-          "name": "comment.block.documentation.rust",
-          "begin": "(?=//[/!])",
+          "name": "comment.line.documentation.rust",
+          "begin": "(?=//(?:!|/(?!/)))",
           "beginCaptures": {
             "1": {
               "name": "markup.definition.rust"
@@ -301,6 +292,15 @@
               }
             }
           ]
+        },
+        {
+          "name": "comment.block.rust",
+          "begin": "/\\*",
+          "end": "\\*/"
+        },
+        {
+          "name": "comment.line.rust",
+          "match": "//.*"
         }
       ]
     },

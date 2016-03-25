@@ -292,4 +292,37 @@ describe('atom-language-rust', () => {
     });
   });
 
+  describe('when toggling comments in the editor', () => {
+    it('should toggle the entire line the cursor is on', () => {
+      let editor = atom.workspace.buildTextEditor();
+      let buffer = editor.getBuffer();
+      let text = 'comment this out';
+      editor.setGrammar(grammar);
+      buffer.setText(text);
+      // Position cursor before the 'this' word
+      editor.getLastCursor().setBufferPosition([0, 9]);
+      editor.toggleLineCommentsInSelection();
+      expect(buffer.getText()).toEqual('//comment this out');
+      editor.toggleLineCommentsInSelection();
+      expect(buffer.getText()).toEqual(text);
+    });
+    it('should toggle all lines with at least one character selected', () => {
+      let editor = atom.workspace.buildTextEditor();
+      let buffer = editor.getBuffer();
+      // Multi-line strings will mess with comment indentation
+      let text = 'comment this out\ncomment this out\ncomment this out';
+      editor.setGrammar(grammar);
+      buffer.setText(text);
+      // Select all text starting at the 'this' word on the first row to the
+      // 'this' word on the third row
+      editor.setSelectedBufferRange([[0, 9], [2, 9]]);
+      editor.toggleLineCommentsInSelection();
+      expect(buffer.getText()).toEqual(
+        '//comment this out\n//comment this out\n//comment this out'
+      );
+      editor.toggleLineCommentsInSelection();
+      expect(buffer.getText()).toEqual(text);
+    });
+  });
+
 });

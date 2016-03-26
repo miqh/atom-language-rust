@@ -369,24 +369,30 @@
     "enumerations": {
       "comment": "enumeration definition",
       "name": "meta.enumeration.rust",
-      "begin": "(?=enum\\s+\\w+)",
-      "end": "(?=\\s*[{;])",
+      "begin": "\\b(enum)\\s+",
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.rust"
+        }
+      },
+      "end": "(?=\\s*\\{)",
       "patterns": [
         {
-          "begin": "(?=enum)",
-          "end": "(?=\\s*[<({;])",
+          "begin": "\\b(\\w+)(?=[\\s<{])",
+          "beginCaptures": {
+            "1": {
+              "name": "entity.name.type.enumeration.rust"
+            }
+          },
+          "end": "(?=\\s*\\{)",
           "patterns": [
             {
-              "include": "#definitions"
+              "include": "#type-parameters"
             },
             {
-              "name": "entity.name.type.enumeration.rust",
-              "match": "(?>\\b[_a-zA-Z][_a-zA-Z0-9]*)"
+              "include": "#keyword-where"
             }
           ]
-        },
-        {
-          "include": "#definitions-common"
         }
       ]
     },

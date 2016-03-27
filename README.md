@@ -4,7 +4,7 @@
 [![ci][ci-badge]][ci]
 
 An [Atom][] package that provides [Rust][] language grammar to facilitate
-custom syntax highlighting for a better code writing experience.
+semantic syntax highlighting for a better code writing experience.
 
 ## Usage
 
@@ -21,6 +21,16 @@ apm install atom-language-rust
 
 Remember to stay updated with the latest version, which might contain fixes
 or even new shinier features.
+
+### Package Settings
+
+Once this package is installed, use the _Settings_ button to access its
+configuration options.
+
+Use the _Additional Styles_ option to enable or disable the styles provided
+by this package. If you wish to override the default colours provided for
+any of the Rust language constructs listed, simply provide a colour value.
+It is worthwhile noting that colour values can be in CSS format.
 
 ## Motivation
 
@@ -48,7 +58,70 @@ See [CHANGELOG] for more information.
 
 ## Contributing
 
-Details to follow once the source for this package reaches a stable state.
+This package is still under active development.
+
+If you notice any inconsistencies with the way Rust code is being highlighted,
+please open up a new issue and include: a code snippet to reproduce the issue,
+an explanation of the expected behaviour, the version of this package and the
+name of the syntax theme package you are using. I would also ask of you to read
+through the Q&A section and have some understanding of it before submitting
+your issue.
+
+## Q&A
+
+- [Why is ... not given a grammar scope for styling?][Q1]
+- [Why are the styles set through this package not taking effect?][Q2]
+- [Why does this grammar package even offer styling?][Q3]
+
+[Q1]: #why-is-not-given-a-grammar-scope-for-styling
+[Q2]: #why-are-the-styles-set-through-this-package-not-taking-effect
+[Q3]: #why-does-this-grammar-package-even-offer-styling
+
+### Why is ... not given a grammar scope for styling?
+
+If the item in question is being highlighted in one pattern of code and not in
+another then it is likely a bug. I would very much appreciate these being
+reported so that they can be fixed up.
+
+For those not familiar with how most language grammar packages work in Atom,
+they leverage the [`first-mate`][first-mate] package in order to provide
+grammar scopes for syntax themes to use. In a nutshell, this package simply
+takes a whole bunch of grammar match rules (i.e. regular expressions) and
+applies it to a source file. I must stress that this is not the same as a
+native language parser. As such, there are some things that are extremely
+difficult (or quite plainly impossible in my opinion) to write match rules for.
+An example of this would be highlighting the names of all user-defined traits,
+wherever they occur. Without a Rust language parser module, such a task would
+be madness.
+
+### Why are the styles set through this package not taking effect?
+
+This package is at the mercy of any other package in the Atom ecosystem that
+decides to hijack grammar styles. I surmise the majority of these offenders
+would be syntax theme packages.
+
+At present, there is not any option to force precedence of the styles contained
+in this package, but I may have a work around which might be rolled into a
+future release.
+
+### Why does this grammar package even offer styling?
+
+In short, convenience.
+
+As far as I am aware, Atom offers no guidance on scope names that grammar
+packages are allowed to define. Consequently, this makes the lives of syntax
+theme package creators difficult. The onus is on them to ensure their package
+styles cover all custom scope names defined by a particular language grammar.
+
+By providing styles along with this package, syntax theme packages that do not
+explicitly style all provided scope names will still have syntax highlighting
+for Rust language constructs not covered. This is the aforementioned
+convenience. I do not expect every syntax theme package out there to account
+for the Rust language.
+
+Styles included in this package are enabled by default. If your syntax theme
+package of choice covers the grammar of this package, you can opt out of
+the included styles by disabling them via package settings.
 
 [apm]: https://atom.io/packages/atom-language-rust
 [apm-badge]: https://img.shields.io/apm/v/atom-language-rust.svg?style=flat-square
@@ -56,5 +129,6 @@ Details to follow once the source for this package reaches a stable state.
 [changelog]: CHANGELOG.md
 [ci]: https://travis-ci.org/miqid/atom-language-rust
 [ci-badge]: https://img.shields.io/travis/miqid/atom-language-rust/master.svg?style=flat-square
+[first-mate]: https://atom.github.io/first-mate/
 [rust]: https://www.rust-lang.org/
 [rust documentation]: https://doc.rust-lang.org/book/documentation.html

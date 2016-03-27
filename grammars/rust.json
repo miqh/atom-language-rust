@@ -1094,7 +1094,7 @@
               "name": "entity.name.type.structure.rust"
             }
           },
-          "end": "(?=\\s*[};])",
+          "end": "(?=\\s*[{;])",
           "patterns": [
             {
               "include": "#comments"

@@ -11,10 +11,18 @@
           "end": "\\]",
           "patterns": [
             {
+              "include": "#comments"
+            },
+            {
               "comment": "attribute literal",
               "name": "string.quoted.double.rust",
               "begin": "\"",
-              "end": "(?<!\\\\)\""
+              "end": "(?<!\\\\)\"",
+              "patterns": [
+                {
+                  "include": "#comments"
+                }
+              ]
             }
           ]
         }
@@ -378,7 +386,10 @@
       "end": "(?=\\s*\\{)",
       "patterns": [
         {
-          "begin": "\\b(\\w+)(?=[\\s<{])",
+          "include": "#comments"
+        },
+        {
+          "begin": "\\b(\\w+)(?=[\\s<{/])",
           "beginCaptures": {
             "1": {
               "name": "entity.name.type.enumeration.rust"
@@ -386,6 +397,9 @@
           },
           "end": "(?=\\s*\\{)",
           "patterns": [
+            {
+              "include": "#comments"
+            },
             {
               "include": "#type-parameters"
             },
@@ -476,7 +490,7 @@
     },
     "implementations": {
       "comment": "implementation definition",
-      "name": "meta.impl.rust",
+      "name": "meta.implementation.rust",
       "begin": "\\b(impl)\\b",
       "beginCaptures": {
         "1": {
@@ -486,10 +500,13 @@
       "end": "(?=\\s*\\{)",
       "patterns": [
         {
+          "include": "#comments"
+        },
+        {
           "include": "#type-parameters"
         },
         {
-          "begin": "(?:\\b([_a-zA-Z]\\w*)|\\[.*\\])(?=[\\s<{])",
+          "begin": "(?:\\b(\\w+)|\\[.*\\])(?=[\\s<{/])",
           "beginCaptures": {
             "1": {
               "comment": "unsemantic scope but provides style consistency",
@@ -498,6 +515,9 @@
           },
           "end": "(?=\\s*\\{)",
           "patterns": [
+            {
+              "include": "#comments"
+            },
             {
               "include": "#type-parameters"
             },
@@ -511,6 +531,9 @@
               },
               "end": "(?=\\s*(?:\\{|where))",
               "patterns": [
+                {
+                  "include": "#comments"
+                },
                 {
                   "include": "#type-parameters"
                 },
@@ -541,8 +564,14 @@
       },
       "patterns": [
         {
+          "include": "#comments"
+        },
+        {
           "name": "variable.parameter.rust",
           "match": "(\\w++)(?=\\s*:(?!:))"
+        },
+        {
+          "include": "#definitions-common"
         }
       ]
     },
@@ -580,7 +609,12 @@
             "1": {
               "name": "keyword.other.rust"
             }
-          }
+          },
+          "patterns": [
+            {
+              "include": "#comments"
+            }
+          ]
         },
         {
           "comment": "use statements",
@@ -592,6 +626,9 @@
             }
           },
           "patterns": [
+            {
+              "include": "#comments"
+            },
             {
               "include": "#keyword-as"
             }
@@ -615,7 +652,7 @@
     "macros": {
       "comment": "macro definition",
       "name": "meta.macro.rust",
-      "begin": "\\b(macro_rules!)(?=\\s)",
+      "begin": "\\b(macro_rules!)\\s+",
       "end": "(?=\\s*[{;])",
       "captures": {
         "1": {
@@ -624,8 +661,12 @@
       },
       "patterns": [
         {
-          "name": "entity.name.other.macro.rust",
-          "match": "(?>\\b[_a-zA-Z][_a-zA-Z0-9]*)"
+          "include": "#comments"
+        },
+        {
+          "comment": "unsemantic scope but provides consistency",
+          "name": "entity.name.function.rust",
+          "match": "\\b(\\w+)(?=[\\s{])"
         }
       ]
     },
@@ -1034,7 +1075,7 @@
     },
     "structures": {
       "comment": "struct definition",
-      "name": "meta.struct.rust",
+      "name": "meta.structure.rust",
       "begin": "\\b(struct)\\s+",
       "beginCaptures": {
         "1": {
@@ -1044,17 +1085,30 @@
       "end": "(?=\\s*[{;])",
       "patterns": [
         {
-          "include": "#type-parameters"
+          "include": "#comments"
         },
         {
-          "include": "#tuple-parameters"
-        },
-        {
-          "include": "#keyword-where"
-        },
-        {
-          "name": "entity.name.type.struct.rust",
-          "match": "([_a-zA-Z]\\w*)"
+          "begin": "\\b(\\w+)(?=[\\s<{(/;])",
+          "beginCaptures": {
+            "1": {
+              "name": "entity.name.type.structure.rust"
+            }
+          },
+          "end": "(?=\\s*[};])",
+          "patterns": [
+            {
+              "include": "#comments"
+            },
+            {
+              "include": "#type-parameters"
+            },
+            {
+              "include": "#tuple-parameters"
+            },
+            {
+              "include": "#keyword-where"
+            }
+          ]
         }
       ]
     },
@@ -1113,7 +1167,7 @@
     "traits": {
       "comment": "trait definition",
       "name": "meta.trait.rust",
-      "begin": "\\b(trait)\\b",
+      "begin": "\\b(trait)\\s+",
       "beginCaptures": {
         "1": {
           "name": "storage.type.rust"
@@ -1122,10 +1176,13 @@
       "end": "(?=\\s*\\{)",
       "patterns": [
         {
+          "include": "#comments"
+        },
+        {
           "include": "#type-parameters"
         },
         {
-          "begin": "(?:\\b([_a-zA-Z]\\w*)|\\[.*\\])(?=[\\s<{]|:(?!:))",
+          "begin": "(?:\\b(\\w+)|\\[.*\\])(?=[\\s<{/]|:(?!:))",
           "beginCaptures": {
             "1": {
               "name": "entity.name.type.trait.rust"
@@ -1133,6 +1190,9 @@
           },
           "end": "(?=\\s*\\{)",
           "patterns": [
+            {
+              "include": "#comments"
+            },
             {
               "include": "#type-parameters"
             },
@@ -1179,6 +1239,9 @@
       },
       "patterns": [
         {
+          "include": "#comments"
+        },
+        {
           "comment": "recursively match for tuple parameter groups",
           "include": "#tuple-parameters"
         },
@@ -1202,6 +1265,9 @@
         }
       },
       "patterns": [
+        {
+          "include": "#comments"
+        },
         {
           "comment": "recursively match for type parameter groups",
           "include": "#type-parameters"

@@ -3,21 +3,44 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning][].
 
+## [0.6.0][] - 2016-03-27
+
+### Adds
+- Separated match rule for `mod` definitions.
+- Separated match rule for the `where` clause.
+- Match rule for type parameters.
+- Match rule for tuple struct parameters.
+- Match rule for modifier-like keywords.
+- Match rule for function parameters.
+- Match rule for `impl` definitions.
+
+### Changes
+- Matching for the `as` keyword to be considered in `use` statements.
+- Match rules for attributes to be combined into one that covers both inner
+  and outer attributes along with attribute literal values.
+- Names of macro definitions to use same scope as functions.
+- Scope names assigned to several language items.
+
+### Fixes
+- Comment matching across many multi-line match rules that were not catching
+  comments at all.
+- Toggle line comment command in Atom ([#3][]).
+
 ## [0.5.0][] - 2016-03-05
 
-## Adds
+### Adds
 - ESLint configuration for the project.
 
-## Changes
+### Changes
 - Primitive type matching to be ignored when part of a path.
 - Grammar scope assigned to `self` and `Self`.
 
 ### Fixes
-- A reported package activation error (#1).
+- A reported package activation error ([#1][]).
 - Leading documentation block lines not having Markdown constructs matched.
 - Linting errors resulting from ESLint configuration.
 
-## Removes
+### Removes
 - Matching for `String`, raw pointers and lambda expressions.
 
 ## [0.4.0][] - 2016-02-21
@@ -62,8 +85,12 @@ This project adheres to [Semantic Versioning][].
 ### Adds
 - Initial project files.
 
+[0.6.0]: https://github.com/miqid/atom-language-rust/compare/0.5.0...0.6.0
 [0.5.0]: https://github.com/miqid/atom-language-rust/compare/0.4.0...0.5.0
 [0.4.0]: https://github.com/miqid/atom-language-rust/compare/0.3.0...0.4.0
 [0.3.0]: https://github.com/miqid/atom-language-rust/compare/0.2.0...0.3.0
 [0.2.0]: https://github.com/miqid/atom-language-rust/compare/0.1.0...0.2.0
 [Semantic Versioning]: http://semver.org/
+
+[#3]: https://github.com/miqid/atom-language-rust/issues/3
+[#1]: https://github.com/miqid/atom-language-rust/issues/1

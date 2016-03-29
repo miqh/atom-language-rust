@@ -1151,6 +1151,21 @@
           "comment": "member access",
           "name": "punctuation.symbol.rust",
           "match": "(?<!\\.)\\.(?!\\.)"
+        },
+        {
+          "comment": "braces",
+          "name": "punctuation.symbol.rust",
+          "match": "[\\[\\]{}()]"
+        },
+        {
+          "comment": "separators",
+          "name": "punctuation.symbol.rust",
+          "match": "[,;]"
+        },
+        {
+          "comment": "optional traits",
+          "name": "punctuation.symbol.rust",
+          "match": "\\?"
         }
       ]
     },

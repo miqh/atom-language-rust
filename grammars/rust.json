@@ -619,7 +619,7 @@
         {
           "comment": "use statements",
           "begin": "\\b(use)\\b",
-          "end": ";",
+          "end": "(?=\\s*;)",
           "captures": {
             "1": {
               "name": "keyword.other.rust"
@@ -631,6 +631,14 @@
             },
             {
               "include": "#keyword-as"
+            },
+            {
+              "include": "#symbols"
+            },
+            {
+              "comment": "path wildcard",
+              "name": "punctuation.symbol.rust",
+              "match": "\\*"
             }
           ]
         }

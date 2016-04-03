@@ -282,7 +282,7 @@ describe('atom-language-rust', () => {
         ],
         value: 'as'
       });
-      expect(tokens[1][3]).toEqual({
+      expect(tokens[1][6]).toEqual({
         scopes: [
           'source.rust',
           'keyword.other.rust'

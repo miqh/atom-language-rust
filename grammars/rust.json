@@ -911,7 +911,7 @@
         },
         {
           "name": "keyword.operator.arithmetic.rust",
-          "match": "/"
+          "match": "/|%"
         },
         {
           "name": "keyword.operator.bitwise.rust",

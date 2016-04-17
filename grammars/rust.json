@@ -399,6 +399,9 @@
           "include": "#comments"
         },
         {
+          "include": "#metavariables"
+        },
+        {
           "begin": "\\b(\\w+)(?=[\\s<{/])",
           "beginCaptures": {
             "1": {
@@ -1123,6 +1126,9 @@
           "include": "#comments"
         },
         {
+          "include": "#metavariables"
+        },
+        {
           "begin": "\\b(\\w+)(?=[\\s<{(/;])",
           "beginCaptures": {
             "1": {
@@ -1237,6 +1243,9 @@
           "include": "#type-parameters"
         },
         {
+          "include": "#metavariables"
+        },
+        {
           "begin": "(?:\\b(\\w+)|\\[.*\\])(?=[\\s<{/]|:(?!:))",
           "beginCaptures": {
             "1": {
@@ -1252,7 +1261,13 @@
               "include": "#type-parameters"
             },
             {
+              "include": "#metavariables"
+            },
+            {
               "include": "#keyword-where"
+            },
+            {
+              "include": "#tokens"
             }
           ]
         }

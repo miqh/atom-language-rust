@@ -525,17 +525,20 @@
           "include": "#comments"
         },
         {
+          "include": "#metavariables"
+        },
+        {
           "include": "#type-parameters"
         },
         {
-          "begin": "(?:\\b(\\w+)|\\[.*\\])(?=[\\s<{/])",
+          "comment": "implementation target",
+          "begin": "\\b(for)\\b",
           "beginCaptures": {
             "1": {
-              "comment": "unsemantic scope but provides style consistency",
-              "name": "entity.name.type.impl.rust"
+              "name": "keyword.other.rust"
             }
           },
-          "end": "(?=\\s*\\{)",
+          "end": "(?=\\s*(?:\\{|where))",
           "patterns": [
             {
               "include": "#comments"
@@ -544,28 +547,53 @@
               "include": "#type-parameters"
             },
             {
-              "comment": "implementation target",
-              "begin": "\\b(for)\\s+",
-              "beginCaptures": {
-                "1": {
-                  "name": "keyword.other.rust"
-                }
-              },
-              "end": "(?=\\s*(?:\\{|where))",
-              "patterns": [
-                {
-                  "include": "#comments"
-                },
-                {
-                  "include": "#type-parameters"
-                },
-                {
-                  "include": "#definitions-common"
-                }
-              ]
+              "include": "#definitions-common"
+            }
+          ]
+        },
+        {
+          "include": "#keyword-where"
+        },
+        {
+          "comment": "prevent name matching inside slice notation",
+          "begin": "(?=\\[)",
+          "end": "(?=[\\]{]|for|where)",
+          "patterns": [
+            {
+              "include": "#tokens"
             },
             {
-              "include": "#keyword-where"
+              "include": "#types"
+            }
+          ]
+        },
+        {
+          "include": "#tokens"
+        },
+        {
+          "begin": "\\b(?=\\w)",
+          "end": "(?=\\s*(?:<|\\]|\\{|for|where))",
+          "patterns": [
+            {
+              "include": "#comments"
+            },
+            {
+              "include": "#type-parameters"
+            },
+            {
+              "include": "#metavariables"
+            },
+            {
+              "include": "#tokens"
+            },
+            {
+              "comment": "unsemantic scope but provides style consistency",
+              "match": "([\\w]++)(?!\\s*[:\\]])",
+              "captures": {
+                "1": {
+                  "name": "entity.name.type.implementation.rust"
+                }
+              }
             }
           ]
         }

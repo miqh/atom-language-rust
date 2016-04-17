@@ -361,6 +361,10 @@
     "definitions-common": {
       "patterns": [
         {
+          "comment": "catch function types",
+          "include": "#functions"
+        },
+        {
           "include": "#keyword-where"
         },
         {
@@ -421,7 +425,6 @@
       "match": "\\b(?:for|loop|while(?:\\s+let\\s+)?|break|continue|if(?:\\s+let\\s+)?|else|in|return)\\b"
     },
     "functions": {
-      "comment": "function definition",
       "name": "meta.function.rust",
       "begin": "\\b(fn)\\b",
       "beginCaptures": {
@@ -429,13 +432,23 @@
           "name": "storage.type.rust"
         }
       },
-      "end": "(?=\\s*[{;,}])",
+      "end": "(?=\\s*[{;,})])",
       "patterns": [
+        {
+          "include": "#comments"
+        },
+        {
+          "comment": "must precede function names to be caught",
+          "include": "#metavariables"
+        },
         {
           "comment": "function type (unnamed)",
           "begin": "(?=\\()",
-          "end": "(?=\\s*[{;,}])",
+          "end": "(?=\\s*[{;,})])",
           "patterns": [
+            {
+              "include": "#comments"
+            },
             {
               "include": "#function-parameters"
             },
@@ -445,8 +458,8 @@
           ]
         },
         {
-          "comment": "named function",
-          "begin": "\\b([_a-zA-Z]\\w*)(?=[\\s<(])",
+          "comment": "function definition (named)",
+          "begin": "\\b(\\w+)(?=\\s*[<(])",
           "beginCaptures": {
             "1": {
               "name": "entity.name.function.rust"
@@ -455,10 +468,10 @@
           "end": "(?=\\s*[{;])",
           "patterns": [
             {
-              "include": "#type-parameters"
+              "include": "#comments"
             },
             {
-              "include": "#keyword-where"
+              "include": "#type-parameters"
             },
             {
               "include": "#function-parameters"
@@ -485,6 +498,9 @@
         }
       },
       "patterns": [
+        {
+          "include": "#comments"
+        },
         {
           "include": "#definitions-common"
         },

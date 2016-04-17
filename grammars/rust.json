@@ -315,6 +315,9 @@
     "common": {
       "patterns": [
         {
+          "include": "#metavariables"
+        },
+        {
           "include": "#bindings"
         },
         {
@@ -362,6 +365,9 @@
         },
         {
           "include": "#lifetimes"
+        },
+        {
+          "include": "#metavariables"
         },
         {
           "include": "#modifiers"
@@ -678,48 +684,6 @@
         }
       ]
     },
-    "macros-common": {
-      "patterns": [
-        {
-          "comment": "special path expansion for macro export",
-          "name": "variable.language.rust",
-          "match": "\\$crate(?=::)"
-        },
-        {
-          "match": "(\\$\\w+)[^:]*:(?!:)\\s*([^.:;,=)}\\]]+)",
-          "captures": {
-            "1": {
-              "name": "variable.other.macro-capture.rust"
-            },
-            "2": {
-              "patterns": [
-                {
-                  "match": "(item|block|stmt|pat|expr|ty|ident|path|tt|meta)(?=\\W)",
-                  "captures": {
-                    "1": {
-                      "name": "keyword.other.macro-designator.rust"
-                    }
-                  }
-                },
-                {
-                  "include": "#keyword-as"
-                },
-                {
-                  "include": "#flow"
-                },
-                {
-                  "include": "#common"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "name": "variable.other.macro-substitution.rust",
-          "match": "\\$\\w+"
-        }
-      ]
-    },
     "markdown-inline": {
       "patterns": [
         {
@@ -836,6 +800,29 @@
           }
         }
       ]
+    },
+    "metavariables": {
+      "comment": "unsupported across multiple lines",
+      "match": "(\\$)\\s*(\\w+)(?:\\s*(:)\\s*(\\w+))?",
+      "captures": {
+        "1": {
+          "name": "punctuation.symbol.rust"
+        },
+        "2": {
+          "name": "variable.other.rust"
+        },
+        "3": {
+          "name": "punctuation.symbol.rust"
+        },
+        "4": {
+          "patterns": [
+            {
+              "name": "keyword.other.rust",
+              "match": "\\b(item|block|stmt|pat|expr|ty|ident|path|tt|meta)\\b"
+            }
+          ]
+        }
+      }
     },
     "miscellaneous": {
       "patterns": [
@@ -1174,6 +1161,11 @@
           "comment": "optional traits",
           "name": "punctuation.symbol.rust",
           "match": "\\?"
+        },
+        {
+          "comment": "macro repetition",
+          "name": "punctuation.symbol.rust",
+          "match": "\\$(?=\\s*\\()"
         }
       ]
     },
@@ -1352,9 +1344,6 @@
     },
     {
       "include": "#definitions"
-    },
-    {
-      "include": "#macros-common"
     },
     {
       "include": "#common"

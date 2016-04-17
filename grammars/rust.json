@@ -629,14 +629,6 @@
       "name": "variable.other.label.rust",
       "match": "'\\w+(?=\\s*:\\s*(?:for|loop|while))"
     },
-    "library": {
-      "patterns": [
-        {
-          "name": "support.other.macro.rust",
-          "match": "(?:cfg|column|concat(?:_idents)?|(?:debug_)?assert(?:_eq)?|(?:option_)?env|file|format(?:_args)?|include(?:_bytes|_str)?|line|module_path|panic|print(?:ln)?|(?:scoped_)?thread_local|select|stringify|try|unimplemented|unreachable|vec|write(?:ln)?)\\s*!(?=\\s*[\\[({])"
-        }
-      ]
-    },
     "lifetimes": {
       "name": "storage.modifier.lifetime.rust",
       "match": "(?>'\\w+)(?!')(?!\\s*:\\s*(?:for|loop|while))"
@@ -727,6 +719,10 @@
           "match": "\\b(\\w+)(?=[\\s{])"
         }
       ]
+    },
+    "macro-invocations": {
+      "name": "support.other.macro.rust",
+      "match": "\\b\\w+\\s*!"
     },
     "markdown-inline": {
       "patterns": [
@@ -1351,6 +1347,9 @@
     },
     {
       "include": "#macros"
+    },
+    {
+      "include": "#macro-invocations"
     },
     {
       "include": "#keyword-as"

@@ -725,7 +725,7 @@
     },
     "macro-invocations": {
       "name": "support.other.macro.rust",
-      "match": "\\b\\w+\\s*!"
+      "match": "\\b\\w+\\s*!(?=\\s*[\\[({])"
     },
     "markdown-inline": {
       "patterns": [

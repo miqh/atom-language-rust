@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning][].
 
+## [0.7.0][] - 2016-04-17
+
+### Adds
+- Various match rules to cover punctuation characters to better support
+  syntax themes that base their styling around them.
+- Matching for metavariables (macros) inside item definition match groups.
+
+### Changes
+- Match rules for macros-related syntax to be simpler, which includes the
+  removal of some scope names.
+- Matching for macro invocations to no longer be restricted to only those
+  part of the Rust standard library.
+
+### Removes
+- Matching for the `Sized` trait.
+
+### Fixes
+- Comment matching for function related blocks.
+- Matching for function types inside certain groups.
+
 ## [0.6.0][] - 2016-03-27
 
 ### Adds
@@ -85,6 +105,7 @@ This project adheres to [Semantic Versioning][].
 ### Adds
 - Initial project files.
 
+[0.7.0]: https://github.com/miqid/atom-language-rust/compare/0.6.0...0.7.0
 [0.6.0]: https://github.com/miqid/atom-language-rust/compare/0.5.0...0.6.0
 [0.5.0]: https://github.com/miqid/atom-language-rust/compare/0.4.0...0.5.0
 [0.4.0]: https://github.com/miqid/atom-language-rust/compare/0.3.0...0.4.0

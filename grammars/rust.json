@@ -1229,10 +1229,6 @@
           "match": "\\b[sS]elf\\b"
         },
         {
-          "name": "storage.type.unsized.rust",
-          "match": "\\b\\?Sized\\b"
-        },
-        {
           "name": "storage.type.rust",
           "match": "\\btype\\b"
         }

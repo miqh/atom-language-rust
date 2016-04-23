@@ -999,7 +999,7 @@
             {
               "comment": "non-ascii character",
               "name": "invalid.illegal.rust",
-              "match": "[^\\x00-\\x7f]++"
+              "match": "[^\\x00-\\x7f]+"
             }
           ]
         },
@@ -1012,7 +1012,7 @@
             {
               "comment": "non-ascii character",
               "name": "invalid.illegal.rust",
-              "match": "[^\\x00-\\x7f]++"
+              "match": "[^\\x00-\\x7f]+"
             }
           ]
         },
@@ -1035,9 +1035,12 @@
           "end": "\"",
           "patterns": [
             {
-              "match": "\\\\(?:x[a-fA-F0-9]{2}|[0nrt'\"\\\\n])|(\\\\(?:x.{1,2}|.))",
+              "match": "(\\\\(?:x[a-fA-F0-9]{2}|[0nrt'\"\\\\]))|(\\\\(?:x.{1,2}|.))",
               "captures": {
                 "1": {
+                  "name": "constant.character.escape.rust"
+                },
+                "2": {
                   "comment": "bad escape",
                   "name": "invalid.illegal.rust"
                 }
@@ -1057,9 +1060,12 @@
           "end": "\"",
           "patterns": [
             {
-              "match": "\\\\(?:u\\{(?:[a-fA-F0-9]{1,5}|0[a-fA-F0-9]{5}|10[a-fA-F0-9]{4})\\}|x[0-7][a-fA-F0-9]|[0nrt'\"\\\\n])|(\\\\(?:u\\{[^}]*\\}|x.{1,2}|\\\\.))",
+              "match": "(\\\\(?:u\\{(?:[a-fA-F0-9]{1,5}|0[a-fA-F0-9]{5}|10[a-fA-F0-9]{4})\\}|x[0-7][a-fA-F0-9]|[0nrt'\"\\\\]))|(\\\\(?:u\\{[^}]*\\}|x.{1,2}|.))",
               "captures": {
                 "1": {
+                  "name": "constant.character.escape.rust"
+                },
+                "2": {
                   "comment": "bad escape",
                   "name": "invalid.illegal.rust"
                 }
@@ -1070,11 +1076,36 @@
         {
           "comment": "byte literal",
           "name": "string.quoted.single.byte.rust",
-          "match": "b'(?:\\\\(?:x[a-fA-F0-9]{2}|[0nrt'\"\\\\n])|([^\\x00-\\x7f]++)|(\\\\(?:x.{1,2}|.)?)|(')|.)([^']++)?'",
+          "match": "b'(?:(\\\\(?:x[a-fA-F0-9]{2}|[0nrt'\"\\\\]))|([^\\x00-\\x7f])|(\\\\(?:x.{1,2}|.)?)|(')|.)([^']+)?'",
           "captures": {
             "1": {
+              "name": "constant.character.escape.rust"
+            },
+            "2": {
               "comment": "non-ascii character",
               "name": "invalid.illegal.rust"
+            },
+            "3": {
+              "comment": "bad escape",
+              "name": "invalid.illegal.rust"
+            },
+            "4": {
+              "comment": "unescaped quote",
+              "name": "invalid.illegal.rust"
+            },
+            "5": {
+              "comment": "superfluous characters",
+              "name": "invalid.illegal.rust"
+            }
+          }
+        },
+        {
+          "comment": "character literal",
+          "name": "string.quoted.single.character.rust",
+          "match": "'(?:(\\\\(?:u\\{(?:[a-fA-F0-9]{1,5}|0[a-fA-F0-9]{5}|10[a-fA-F0-9]{4})\\}|x[0-7][a-fA-F0-9]|[0nrt'\"\\\\]))|(\\\\(?:u\\{?[^}]*\\}?|x.{1,2}|.)?)|(')|.)([^'\\s]+)?'",
+          "captures": {
+            "1": {
+              "name": "constant.character.escape.rust"
             },
             "2": {
               "comment": "bad escape",
@@ -1085,25 +1116,6 @@
               "name": "invalid.illegal.rust"
             },
             "4": {
-              "comment": "superfluous characters",
-              "name": "invalid.illegal.rust"
-            }
-          }
-        },
-        {
-          "comment": "character literal",
-          "name": "string.quoted.single.character.rust",
-          "match": "'(?:\\\\(?:u\\{(?:[a-fA-F0-9]{1,5}|0[a-fA-F0-9]{5}|10[a-fA-F0-9]{4})\\}|x[0-7][a-fA-F0-9]|[0nrt'\"\\\\n])|(\\\\(?:u\\{?[^}]*\\}?|x.{1,2}|.)?)|(')|.)([^'\\s]++)?'",
-          "captures": {
-            "1": {
-              "comment": "bad escape",
-              "name": "invalid.illegal.rust"
-            },
-            "2": {
-              "comment": "unescaped quote",
-              "name": "invalid.illegal.rust"
-            },
-            "3": {
               "comment": "superfluous characters",
               "name": "invalid.illegal.rust"
             }

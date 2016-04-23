@@ -102,6 +102,21 @@ describe('atom-language-rust', () => {
   });
 
   describe('when tokenizing byte literals', () => {
+    it('should detect some valid escapes', () => {
+      let tokens = grammar.tokenizeLines(
+        "b'\\xff' b'\\n' b'\\0' b'\\'' b'\\\\'"
+      );
+      let scopes = [
+        'source.rust',
+        'string.quoted.single.byte.rust',
+        'constant.character.escape.rust'
+      ];
+      expect(tokens[0][1]).toEqual({scopes, value: '\\xff'});
+      expect(tokens[0][5]).toEqual({scopes, value: '\\n'});
+      expect(tokens[0][9]).toEqual({scopes, value: '\\0'});
+      expect(tokens[0][13]).toEqual({scopes, value: "\\'"});
+      expect(tokens[0][17]).toEqual({scopes, value: '\\\\'});
+    });
     it('should detect a unicode value as invalid', () => {
       let tokens = grammar.tokenizeLines(
         "b'Δ'"
@@ -157,49 +172,45 @@ describe('atom-language-rust', () => {
   });
 
   describe('when tokenizing character literals', () => {
+    it('should detect some valid escapes', () => {
+      let tokens = grammar.tokenizeLines(
+        "'\\u{10ffff}' '\\x7f' '\\n' '\\0' '\\'' '\\\\'"
+      );
+      let scopes = [
+        'source.rust',
+        'string.quoted.single.character.rust',
+        'constant.character.escape.rust'
+      ];
+      expect(tokens[0][1]).toEqual({scopes, value: '\\u{10ffff}'});
+      expect(tokens[0][5]).toEqual({scopes, value: '\\x7f'});
+      expect(tokens[0][9]).toEqual({scopes, value: '\\n'});
+      expect(tokens[0][13]).toEqual({scopes, value: '\\0'});
+      expect(tokens[0][17]).toEqual({scopes, value: "\\'"});
+      expect(tokens[0][21]).toEqual({scopes, value: '\\\\'});
+    });
     it('should detect bad 8-bit escapes as invalid', () => {
       let tokens = grammar.tokenizeLines(
-        `'\\xff'
-        '\\xyz'`
+        "'\\xff' '\\xyz'"
       );
-      expect(tokens[0][1]).toEqual({
-        scopes: [
-          'source.rust',
-          'string.quoted.single.character.rust',
-          'invalid.illegal.rust'
-        ],
-        value: '\\xff'
-      });
-      expect(tokens[1][2]).toEqual({
-        scopes: [
-          'source.rust',
-          'string.quoted.single.character.rust',
-          'invalid.illegal.rust'
-        ],
-        value: '\\xyz'
-      });
+      let scopes = [
+        'source.rust',
+        'string.quoted.single.character.rust',
+        'invalid.illegal.rust'
+      ];
+      expect(tokens[0][1]).toEqual({scopes, value: '\\xff'});
+      expect(tokens[0][5]).toEqual({scopes, value: '\\xyz'});
     });
     it('should detect bad unicode escapes as invalid', () => {
       let tokens = grammar.tokenizeLines(
-        `'\\u{110000}'
-        '\\u{foo}'`
+        "'\\u{110000}' '\\u{foo}'"
       );
-      expect(tokens[0][1]).toEqual({
-        scopes: [
-          'source.rust',
-          'string.quoted.single.character.rust',
-          'invalid.illegal.rust'
-        ],
-        value: '\\u{110000}'
-      });
-      expect(tokens[1][2]).toEqual({
-        scopes: [
-          'source.rust',
-          'string.quoted.single.character.rust',
-          'invalid.illegal.rust'
-        ],
-        value: '\\u{foo}'
-      });
+      let scopes = [
+        'source.rust',
+        'string.quoted.single.character.rust',
+        'invalid.illegal.rust'
+      ];
+      expect(tokens[0][1]).toEqual({scopes, value: '\\u{110000}'});
+      expect(tokens[0][5]).toEqual({scopes, value: '\\u{foo}'});
     });
     it('should detect extra characters as invalid', () => {
       let tokens = grammar.tokenizeLines(

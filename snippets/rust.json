@@ -1,76 +1,271 @@
-{
-  ".source.rust": {
-    "else": {
-      "prefix": "else",
-      "body": "else {\n\t$1\n}"
-    },
-    "fn": {
-      "prefix": "fn",
-      "body": "fn ${1:ident}(${2:args}) {\n\t$3\n}"
-    },
-    "for-loop": {
-      "prefix": "for",
-      "body": "for ${1:pat} in ${2:expr} {\n\t$3\n}"
-    },
-    "enum": {
-      "prefix": "enum",
-      "body": "enum ${1:ident} {\n\t$2\n}"
-    },
-    "if": {
-      "prefix": "if",
-      "body": "if ${1:expr} {\n\t$2\n}"
-    },
-    "if-let": {
-      "prefix": "iflet",
-      "body": "if let ${1:pat} = ${2:expr} {\n\t$3\n}"
-    },
-    "impl": {
-      "prefix": "impl",
-      "body": "impl ${1:ty} {\n\t$2\n}"
-    },
-    "loop": {
-      "prefix": "loop",
-      "body": "loop {\n\t$1\n}"
-    },
-    "macro": {
-      "prefix": "macro",
-      "body": "macro_rules! ${1:ident} {\n\t($2) => ($3)\n}"
-    },
-    "main": {
-      "prefix": "main",
-      "body": "fn main() {\n\t$1\n}"
-    },
-    "match": {
-      "prefix": "match",
-      "body": "match ${1:expr} {\n\t${2:_ => ()},\n}"
-    },
-    "mod": {
-      "prefix": "mod",
-      "body": "mod ${1:ident} {\n\t$2\n}"
-    },
-    "return": {
+# Your snippets
+#
+# Atom snippets allow you to enter a simple prefix in the editor and hit tab to
+# expand the prefix into a larger code block with templated values.
+#
+# You can create a new snippet in this file by typing "snip" and then hitting
+# tab.
+#
+# An example CoffeeScript snippet to expand log to console.log:
+#
+# '.source.coffee':
+#   'Console log':
+#     'prefix': 'log'
+#     'body': 'console.log $1'
+#
+# Each scope (e.g. '.source.coffee' above) can only be declared once.
+#
+# This file uses CoffeeScript Object Notation (CSON).
+# If you are unfamiliar with CSON, you can read more about it in the
+# Atom Flight Manual:
+# https://atom.io/docs/latest/using-atom-basic-customization#cson
+'.source.rust':
+  'allow':
+    'prefix': 'allow'
+    'body': '#[allow(${1:lint})]'
+  'allow!':
+    'prefix': 'allow!'
+    'body': '#![allow(${1:lint})]'
+  "assert!(…)":
+    prefix: "assert"
+    body: "assert!(${1});"
+  "assert_eq!(…, …)":
+    prefix: "assert_eq"
+    body: "assert_eq!(${1}, ${2});"
+  undefined:
+   prefix: "bench"
+   body: '''
+    #[bench]
+    fn ${1:name}(b: &mut test::Bencher) {
+      ${2:b.iter(|| ${3:/* benchmark code */})}
+    }
+  '''
+  "const …: … = …;":
+   prefix: "const"
+   body: "const ${1:CONST}: ${2:Type} = ${4:init};"
+  'deny':
+    'prefix': 'deny'
+    'body': '#[deny(${1:lint})]'
+  'deny!':
+    'prefix': 'deny!'
+    'body': '#![deny(${1:lint})]'
+  'derive':
+    'prefix': 'derive'
+    'body': '#[derive(${1:Trait})]'
+  "else { … }":
+    prefix: "else"
+    body: '''
+     else {
+       ${1:unimplemented!();}
+     }
+   '''
+  'enum':
+    'prefix': 'enum'
+    'body': '''
+      enum ${1:TypeName} {
+      \t$2
+      }
+    '''
+  "Err(…)":
+    prefix: "Err"
+    body: "Err(${1})"
+  "extern crate …;":
+   prefix: "extern-crate"
+   body: "extern crate ${1:name};"
+  "extern \"C\" fn …(…) { … }":
+    prefix: "extern-fn"
+    body: '''
+     extern "C" fn ${1:name}(${2:arg}: ${3:Type}) -> ${4:RetType} {
+       ${5:// add code here}
+     }
+   '''
+  "extern \"C\" { … }":
+    prefix: "extern-mod"
+    body: '''
+     extern "C" {
+       ${2:// add code here}
+     }
+   '''
+  "fmt!(…)":
+    prefix: "fmt"
+    body: "fmt!(\"${1:\\{${2::?}\\}}\"${1/([^\\{])*(\\{.*\\})?.*/(?2:, :\\);)/}$3${1/([^\\{])*(\\{.*\\})?.*/(?2:\\))/}"
+  'fn':
+    'prefix': 'fn'
+    'body': '''
+      fn ${1:function_name}($2) {
+      \t${3:unimplemented!()}
+      }
+    '''
+  'fnr':
+    'prefix': 'fnr'
+    'body': '''
+      fn ${1:function_name}($2) -> ${3:TypeName} {
+      \t${4:unimplemented!()}
+      }
+    '''
+  'for':
+    'prefix': 'for'
+    'body': '''
+      for ${1:variable} in ${2:iterator} {
+      \t$3
+      }
+    '''
+  "if let … = … { … }":
+    prefix: "if-let"
+    body: '''
+     if let ${1:Some(pat)} = ${2:expr} {
+       ${2:unimplemented!();}
+     }
+   '''
+  'if':
+    'prefix': 'if'
+    'body': '''
+      if ${1:expression} {
+      \t$2
+      }
+    '''
+  "impl … for … { … }":
+    prefix: "impl-trait"
+    body: '''
+     impl ${1:Trait} for ${2:Type} {
+       ${3:// add code here}
+     }
+   '''
+  'impl':
+    'prefix': 'impl'
+    'body': '''
+      impl ${1:TypeName} {
+      \t$2
+      }
+    '''
+  'let':
+    'prefix': 'let'
+    'body': 'let ${1:variable} = ${2:value};'
+  'loop':
+    'prefix': 'loop'
+    'body': '''
+      loop {
+      \t$1
+      }
+    '''
+  "macro_rules! … { … }":
+    prefix: "macro_rules"
+    body: '''
+     macro_rules! ${1:name} {
+       (${2}) => (${3})
+     }
+   '''
+  'macro':
+    'prefix': 'macro'
+    'body': '''
+      macro_rules! ${1:macro_name} {
+      \t($2) => ($3);
+      }
+    '''
+  'main':
+    'prefix': 'main'
+    'body': '''
+      fn main() {
+      \t${1:unimplemented!()}
+      }
+    '''
+  'match':
+    'prefix': 'match'
+    'body': '''
+      match ${1:expression} {
+      \t$2
+      }
+    '''
+  "mod … { … }":
+    prefix: "mod"
+    body: '''
+     mod ${1:name} {
+       ${2:// add code here}
+     }
+   '''
+  "Ok(…)":
+    prefix: "Ok"
+    body: "Ok(${1:result})"
+  "panic!(…)":
+    prefix: "panic"
+    body: "panic!(\"${1:\\{${2::?}\\}}\"${1/([^\\{])*(\\{.*\\})?.*/(?2:, :\\);)/}$3${1/([^\\{])*(\\{.*\\})?.*/(?2:\\);)/}"
+  'print':
+    'prefix': 'print'
+    'body': 'print!("${1:{${2::?}\\}}", ${3});'
+  'println':
+    'prefix': 'println'
+    'body': 'println!("${1:{${2::?}\\}}", ${3});'
+  "return":
       "prefix": "return",
       "body": "return ${1:expr};"
-    },
-    "struct": {
-      "prefix": "struct",
-      "body": "struct ${1:ident} {\n\t$2\n}"
-    },
-    "trait": {
-      "prefix": "trait",
-      "body": "trait ${1:ident} {\n\t$2\n}"
-    },
-    "unsafe": {
-      "prefix": "unsafe",
-      "body": "unsafe {\n\t$1\n}"
-    },
-    "while": {
-      "prefix": "while",
-      "body": "while ${1:expr} {\n\t$2\n}"
-    },
-    "while-let": {
-      "prefix": "whilelet",
-      "body": "while let ${1:pat} = ${2:expr} {\n\t$3\n}"
+  "Some(…)":
+    prefix: "Some"
+    body: "Some(${1})"
+  'static':
+    'prefix': 'static'
+    'body': 'static ${1:CONSTANT}: ${2:TypeName} = ${3:value};'
+  "struct …(…);":
+    prefix: "struct-tuple"
+    body: "struct ${1:Name}(${2:Type});"
+  "struct …;":
+    prefix: "struct-unit"
+    body: "struct ${1:Name};"
+  'struct':
+    'prefix': 'struct'
+    'body': '''
+      struct ${1:TypeName} {
+      \t$2
+      }
+    '''
+  'test':
+    'prefix': 'test'
+    'body': '''
+      #[test]
+      fn ${1:test_name}() {
+      \t${2:unimplemented!()}
+      }
+    '''
+  'testmod':
+    'prefix': 'testmod'
+    'body': '''
+      #[cfg(test)]
+      mod tests {
+      \tuse super::*;
+
+      \t#[test]
+      \tfn ${1:test_name}() {
+      \t\t${2:unimplemented!()}
+      \t}
+      }
+    '''
+  'trait':
+    'prefix': 'trait'
+    'body': '''
+      trait ${1:TypeName} {
+      \t$2
+      }
+    '''
+  'type':
+    'prefix': 'type'
+    'body': 'type ${1:TypeName} = ${2:TypeName};'
+  "unsafe": {
+   "prefix": "unsafe",
+   "body": "unsafe {\n\t$1\n}"
     }
-  }
-}
+  'warn':
+    'prefix': 'warn'
+    'body': '#[warn(${1:lint})]'
+  'warn!':
+    'prefix': 'warn!'
+    'body': '#![warn(${1:lint})]'
+  "while-let": {
+   "prefix": "whilelet",
+   "body": "while let ${1:pat} = ${2:expr} {\n\t$3\n}"
+    }
+  'while':
+    'prefix': 'while'
+    'body': '''
+      while ${1:expression} {
+      \t$2
+      }
+    '''

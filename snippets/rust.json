@@ -196,8 +196,8 @@
     'prefix': 'println'
     'body': 'println!("${1:{${2::?}\\}}", ${3});'
   "return":
-      "prefix": "return",
-      "body": "return ${1:expr};"
+   "prefix": "return",
+   "body": "return ${1:expr};"
   "Some(…)":
     prefix: "Some"
     body: "Some(${1})"

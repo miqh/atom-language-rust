@@ -505,6 +505,9 @@
           "include": "#comments"
         },
         {
+          "include": "#tuple-parameters"
+        },
+        {
           "include": "#definitions-common"
         },
         {

@@ -611,7 +611,7 @@
       "match": "\\bas\\b"
     },
     "keyword-where": {
-      "begin": "(?<=\\s)(where)\\s+",
+      "begin": "\\b(where)\\b",
       "end": "(?=\\s*[{;])",
       "beginCaptures": {
         "1": {

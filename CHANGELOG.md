@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning][].
 
+## [0.8.0][] - 2016-05-21
+
+### Adds
+- Match rules for escape characters inside character and string literals.
+- Configuration option to style token characters.
+
+### Fixes
+- Matching for function parameter names from terminating early when a
+  tuple parameter type is encountered.
+- Matching for `where` clauses that begin on another line to the item which
+  they are specified for ([#6][]).
+
 ## [0.7.0][] - 2016-04-17
 
 ### Adds
@@ -105,6 +117,7 @@ This project adheres to [Semantic Versioning][].
 ### Adds
 - Initial project files.
 
+[0.8.0]: https://github.com/miqid/atom-language-rust/compare/0.7.0...0.8.0
 [0.7.0]: https://github.com/miqid/atom-language-rust/compare/0.6.0...0.7.0
 [0.6.0]: https://github.com/miqid/atom-language-rust/compare/0.5.0...0.6.0
 [0.5.0]: https://github.com/miqid/atom-language-rust/compare/0.4.0...0.5.0
@@ -113,5 +126,6 @@ This project adheres to [Semantic Versioning][].
 [0.2.0]: https://github.com/miqid/atom-language-rust/compare/0.1.0...0.2.0
 [Semantic Versioning]: http://semver.org/
 
+[#6]: https://github.com/miqid/atom-language-rust/issues/6
 [#3]: https://github.com/miqid/atom-language-rust/issues/3
 [#1]: https://github.com/miqid/atom-language-rust/issues/1

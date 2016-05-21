@@ -58,8 +58,6 @@ See [CHANGELOG] for more information.
 
 ## Contributing
 
-This package is still under active development.
-
 If you notice any inconsistencies with the way Rust code is being highlighted,
 please open up a new issue and include: a code snippet to reproduce the issue,
 an explanation of the expected behaviour, the version of this package and the

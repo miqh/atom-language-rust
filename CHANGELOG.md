@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning][].
 
+## [0.8.1][] - 2016-07-07
+
+### Fixes
+- Matching for certain keyword expressions that look like macro invocations
+  ([#7][]).
+
 ## [0.8.0][] - 2016-05-21
 
 ### Adds
@@ -117,6 +123,7 @@ This project adheres to [Semantic Versioning][].
 ### Adds
 - Initial project files.
 
+[0.8.1]: https://github.com/miqid/atom-language-rust/compare/0.8.0...0.8.1
 [0.8.0]: https://github.com/miqid/atom-language-rust/compare/0.7.0...0.8.0
 [0.7.0]: https://github.com/miqid/atom-language-rust/compare/0.6.0...0.7.0
 [0.6.0]: https://github.com/miqid/atom-language-rust/compare/0.5.0...0.6.0
@@ -126,6 +133,7 @@ This project adheres to [Semantic Versioning][].
 [0.2.0]: https://github.com/miqid/atom-language-rust/compare/0.1.0...0.2.0
 [Semantic Versioning]: http://semver.org/
 
+[#7]: https://github.com/miqid/atom-language-rust/issues/7
 [#6]: https://github.com/miqid/atom-language-rust/issues/6
 [#3]: https://github.com/miqid/atom-language-rust/issues/3
 [#1]: https://github.com/miqid/atom-language-rust/issues/1

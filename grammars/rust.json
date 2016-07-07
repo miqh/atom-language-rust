@@ -1379,9 +1379,6 @@
       "include": "#macros"
     },
     {
-      "include": "#macro-invocations"
-    },
-    {
       "include": "#keyword-as"
     },
     {
@@ -1413,6 +1410,9 @@
     },
     {
       "include": "#definitions"
+    },
+    {
+      "include": "#macro-invocations"
     },
     {
       "include": "#common"

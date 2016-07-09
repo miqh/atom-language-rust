@@ -39,6 +39,16 @@
     "comments": {
       "patterns": [
         {
+          "include": "#comment-blocks"
+        },
+        {
+          "include": "#comment-lines"
+        }
+      ]
+    },
+    "comment-blocks": {
+      "patterns": [
+        {
           "name": "comment.block.documentation.rust",
           "begin": "(/\\*[*!])",
           "beginCaptures": {
@@ -54,7 +64,11 @@
           },
           "patterns": [
             {
-              "match": "(?m)^\\s*(\\*)\\s+(#(?:[^*]+|\\*(?!\\/))+)",
+              "comment": "recursively match for comment blocks",
+              "include": "#comment-blocks"
+            },
+            {
+              "match": "(?m)^\\s*(\\*)\\s+(#(?:[^*/]+|\\*(?!\\/)|/(?!\\*))+)",
               "captures": {
                 "1": {
                   "name": "markup.definition.rust"
@@ -71,7 +85,7 @@
             },
             {
               "name": "markup.list.unnumbered.rust",
-              "match": "(?m)^\\s*(\\*)\\s+([*+\\-])\\s+(?=\\S)((?:[^*]+|\\*(?!\\/))+)",
+              "match": "(?m)^\\s*(\\*)\\s+([*+\\-])\\s+(?=\\S)((?:[^*/]+|\\*(?!\\/)|/(?!\\*))+)?",
               "captures": {
                 "1": {
                   "name": "markup.definition.rust"
@@ -90,7 +104,7 @@
             },
             {
               "name": "markup.list.numbered.rust",
-              "match": "(?m)^\\s*(\\*)\\s+(\\d+\\.)\\s+(?=\\S)((?:[^*]+|\\*(?!\\/))+)",
+              "match": "(?m)^\\s*(\\*)\\s+(\\d+\\.)\\s+(?=\\S)((?:[^*/]+|\\*(?!\\/)|/(?!\\*))+)?",
               "captures": {
                 "1": {
                   "name": "markup.definition.rust"
@@ -108,7 +122,7 @@
               }
             },
             {
-              "match": "(?m)^\\s*(\\*)\\s+(>)((?:[^*]+|\\*(?!\\/))+)",
+              "match": "(?m)^\\s*(\\*)\\s+(>)((?:[^*/]+|\\*(?!\\/)|/(?!\\*))+)",
               "captures": {
                 "1": {
                   "name": "markup.definition.rust"
@@ -123,7 +137,7 @@
             },
             {
               "comment": "unterminated raw blocks must not leak",
-              "begin": "(?m)^\\s*(\\*)\\s+(```)((?:[^*]+|\\*(?!\\/))*)",
+              "begin": "(?m)^\\s*(\\*)\\s+(```)((?:[^*/]+|\\*(?!\\/)|/(?!\\*))*)",
               "end": "(```)|(?=\\*/)",
               "beginCaptures": {
                 "1": {
@@ -143,7 +157,11 @@
               },
               "patterns": [
                 {
-                  "match": "(\\*)\\s+((?:[^*`]+|\\*(?!\\/)|`(?!``))*)",
+                  "comment": "recursively match for comment blocks",
+                  "include": "#comment-blocks"
+                },
+                {
+                  "match": "(\\*)\\s+((?:[^*`/]+|\\*(?!\\/)|`(?!``)|/(?!\\*))*)",
                   "captures": {
                     "1": {
                       "name": "markup.definition.rust"
@@ -156,7 +174,7 @@
               ]
             },
             {
-              "match": "(\\*)\\s+((?:[^*]+|\\*(?!\\/))+)",
+              "match": "(\\*)\\s+((?:[^*/]+|\\*(?!\\/)|/(?!\\*))+)?",
               "captures": {
                 "1": {
                   "name": "markup.definition.rust"
@@ -172,6 +190,21 @@
             }
           ]
         },
+        {
+          "name": "comment.block.rust",
+          "begin": "/\\*",
+          "end": "\\*/",
+          "patterns": [
+            {
+              "comment": "recursively match for comment blocks",
+              "include": "#comment-blocks"
+            }
+          ]
+        }
+      ]
+    },
+    "comment-lines": {
+      "patterns": [
         {
           "name": "comment.line.documentation.rust",
           "begin": "(?=//(?:!|/(?!/)))",
@@ -300,11 +333,6 @@
               }
             }
           ]
-        },
-        {
-          "name": "comment.block.rust",
-          "begin": "/\\*",
-          "end": "\\*/"
         },
         {
           "name": "comment.line.rust",

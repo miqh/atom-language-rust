@@ -253,6 +253,74 @@ describe('atom-language-rust', () => {
     });
   });
 
+  describe('when tokenizing comments', () => {
+    it('should detect single-line nested comment blocks', () => {
+      let tokens = grammar.tokenizeLines(
+        '/* outer /* inner */ */'
+      );
+      let outerScopes = [
+        'source.rust',
+        'comment.block.rust'
+      ];
+      let innerScopes = [
+        'source.rust',
+        'comment.block.rust',
+        'comment.block.rust'
+      ];
+      expect(tokens[0][0]).toEqual({scopes: outerScopes, value: '/*'});
+      expect(tokens[0][2]).toEqual({scopes: innerScopes, value: '/*'});
+      expect(tokens[0][4]).toEqual({scopes: innerScopes, value: '*/'});
+      expect(tokens[0][6]).toEqual({scopes: outerScopes, value: '*/'});
+    });
+    it('should detect multi-line nested comment blocks', () => {
+      let tokens = grammar.tokenizeLines(`
+        /* outer
+          /* inner
+          */
+        */
+      `);
+      let outerScopes = [
+        'source.rust',
+        'comment.block.rust'
+      ];
+      let innerScopes = [
+        'source.rust',
+        'comment.block.rust',
+        'comment.block.rust'
+      ];
+      expect(tokens[1][1]).toEqual({scopes: outerScopes, value: '/*'});
+      expect(tokens[2][1]).toEqual({scopes: innerScopes, value: '/*'});
+      expect(tokens[3][1]).toEqual({scopes: innerScopes, value: '*/'});
+      expect(tokens[4][1]).toEqual({scopes: outerScopes, value: '*/'});
+    });
+    it('should detect unclosed single-line nested comment blocks', () => {
+      let tokens = grammar.tokenizeLines(
+        '/* outer /* inner */code'
+      );
+      expect(tokens[0][5]).toEqual({
+        scopes: [
+          'source.rust',
+          'comment.block.rust'
+        ],
+        value: 'code'
+      });
+    });
+    it('should detect unclosed multi-line nested comment blocks', () => {
+      let tokens = grammar.tokenizeLines(`
+        /* outer
+          /* inner
+          */code
+      `);
+      expect(tokens[3][2]).toEqual({
+        scopes: [
+          'source.rust',
+          'comment.block.rust'
+        ],
+        value: 'code'
+      });
+    });
+  });
+
   describe('when tokenizing primitive casts', () => {
     it('should detect the as keyword', () => {
       let tokens = grammar.tokenizeLines(

@@ -58,12 +58,7 @@ See [CHANGELOG] for more information.
 
 ## Contributing
 
-If you notice any inconsistencies with the way Rust code is being highlighted,
-please open up a new issue and include: a code snippet to reproduce the issue,
-an explanation of the expected behaviour, the version of this package and the
-name of the syntax theme package you are using. I would also ask of you to read
-through the Q&A section and have some understanding of it before submitting
-your issue.
+See [CONTRIBUTING].
 
 ## Q&A
 
@@ -125,6 +120,7 @@ the included styles by disabling them via package settings.
 [apm-badge]: https://img.shields.io/apm/v/atom-language-rust.svg?style=flat-square
 [atom]: https://atom.io/
 [changelog]: CHANGELOG.md
+[contributing]: CONTRIBUTING.md
 [ci]: https://travis-ci.org/miqid/atom-language-rust
 [ci-badge]: https://img.shields.io/travis/miqid/atom-language-rust/master.svg?style=flat-square
 [first-mate]: https://atom.github.io/first-mate/

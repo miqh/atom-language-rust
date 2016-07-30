@@ -321,6 +321,28 @@ describe('atom-language-rust', () => {
     });
   });
 
+  describe('when tokenizing macro invocations', () => {
+    it('should not detect keywords part of expressions', () => {
+      let tokens = grammar.tokenizeLines(
+        'if !(a && b) {} match !(a) {_ => ()}'
+      );
+      expect(tokens[0][0]).toEqual({
+        scopes: [
+          'source.rust',
+          'keyword.control.rust'
+        ],
+        value: 'if'
+      });
+      expect(tokens[0][12]).toEqual({
+        scopes: [
+          'source.rust',
+          'keyword.control.match.rust'
+        ],
+        value: 'match'
+      });
+    });
+  });
+
   describe('when tokenizing primitive casts', () => {
     it('should detect the as keyword', () => {
       let tokens = grammar.tokenizeLines(
@@ -367,6 +389,23 @@ describe('atom-language-rust', () => {
           'keyword.other.rust'
         ],
         value: 'as'
+      });
+    });
+  });
+
+  describe('when tokenizing where clauses', () => {
+    it('should detect those beginning on new lines', () => {
+      let tokens = grammar.tokenizeLines(`
+        fn foo<T>(x: T)
+          where T: Clone {}
+      `);
+      expect(tokens[2][1]).toEqual({
+        scopes: [
+          'source.rust',
+          'meta.function.rust',
+          'keyword.other.rust'
+        ],
+        value: 'where'
       });
     });
   });

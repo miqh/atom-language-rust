@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning][].
 
+## [0.9.0][] - 2016-08-20
+
+### Changes
+- Match rules for block comments to identify nested blocks so that they
+  are styled consistently.
+
+### Fixes
+- A package activation error for certain distributions (namely via
+  `community` from AUR) of Atom ([#8][]).
+
 ## [0.8.1][] - 2016-07-07
 
 ### Fixes
@@ -123,6 +133,7 @@ This project adheres to [Semantic Versioning][].
 ### Adds
 - Initial project files.
 
+[0.9.0]: https://github.com/miqid/atom-language-rust/compare/0.8.1...0.9.0
 [0.8.1]: https://github.com/miqid/atom-language-rust/compare/0.8.0...0.8.1
 [0.8.0]: https://github.com/miqid/atom-language-rust/compare/0.7.0...0.8.0
 [0.7.0]: https://github.com/miqid/atom-language-rust/compare/0.6.0...0.7.0
@@ -133,6 +144,7 @@ This project adheres to [Semantic Versioning][].
 [0.2.0]: https://github.com/miqid/atom-language-rust/compare/0.1.0...0.2.0
 [Semantic Versioning]: http://semver.org/
 
+[#8]: https://github.com/miqid/atom-language-rust/issues/8
 [#7]: https://github.com/miqid/atom-language-rust/issues/7
 [#6]: https://github.com/miqid/atom-language-rust/issues/6
 [#3]: https://github.com/miqid/atom-language-rust/issues/3

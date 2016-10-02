@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning][].
 
+## [0.10.0][] - 2016-10-02
+
+### Adds
+- Convenience snippets for the `break` and `continue` keywords ([#9][]).
+
 ## [0.9.0][] - 2016-08-20
 
 ### Changes
@@ -133,6 +138,7 @@ This project adheres to [Semantic Versioning][].
 ### Adds
 - Initial project files.
 
+[0.10.0]: https://github.com/miqid/atom-language-rust/compare/0.9.0...0.10.0
 [0.9.0]: https://github.com/miqid/atom-language-rust/compare/0.8.1...0.9.0
 [0.8.1]: https://github.com/miqid/atom-language-rust/compare/0.8.0...0.8.1
 [0.8.0]: https://github.com/miqid/atom-language-rust/compare/0.7.0...0.8.0
@@ -149,3 +155,5 @@ This project adheres to [Semantic Versioning][].
 [#6]: https://github.com/miqid/atom-language-rust/issues/6
 [#3]: https://github.com/miqid/atom-language-rust/issues/3
 [#1]: https://github.com/miqid/atom-language-rust/issues/1
+
+[#9]: https://github.com/miqid/atom-language-rust/pull/9

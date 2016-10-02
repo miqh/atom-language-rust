@@ -1,5 +1,13 @@
 {
   ".source.rust": {
+    "break": {
+      "prefix": "br",
+      "body": "break;"
+    },
+    "continue": {
+      "prefix": "con",
+      "body": "continue;"
+    },
     "else": {
       "prefix": "else",
       "body": "else {\n\t$1\n}"

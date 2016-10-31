@@ -20,6 +20,10 @@
       "prefix": "for",
       "body": "for ${1:pat} in ${2:expr} {\n\t$3\n}"
     },
+    "format": {
+      "prefix": "format",
+      "body": "format!(\"${1:\\{\\}}\", ${2:value})$0"
+    },
     "enum": {
       "prefix": "enum",
       "body": "enum ${1:ident} {\n\t$2\n}"
@@ -56,6 +60,14 @@
       "prefix": "mod",
       "body": "mod ${1:ident} {\n\t$2\n}"
     },
+    "print": {
+      "prefix": "print",
+      "body": "print!(\"${1:\\{\\}}\", ${2:value});"
+    },
+    "println": {
+      "prefix": "println",
+      "body": "println!(\"${1:\\{\\}}\", ${2:value});"
+    },
     "return": {
       "prefix": "return",
       "body": "return ${1:expr};"
@@ -71,6 +83,10 @@
     "unsafe": {
       "prefix": "unsafe",
       "body": "unsafe {\n\t$1\n}"
+    },
+    "vec": {
+      "prefix": "vec",
+      "body": "vec![$1]$0"
     },
     "while": {
       "prefix": "while",

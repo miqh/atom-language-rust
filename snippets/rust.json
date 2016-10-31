@@ -22,7 +22,7 @@
     },
     "format": {
       "prefix": "format",
-      "body": "format!(\"${1:\\{\\}}\", ${2:value})$0"
+      "body": "format!(\"${1:\\{\\}}\", ${2:value})$3"
     },
     "enum": {
       "prefix": "enum",
@@ -86,7 +86,7 @@
     },
     "vec": {
       "prefix": "vec",
-      "body": "vec![$1]$0"
+      "body": "vec![$1]$2"
     },
     "while": {
       "prefix": "while",

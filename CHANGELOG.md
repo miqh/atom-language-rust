@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning][].
 
+## [0.11.0][] - 2016-11-01
+
+### Adds
+- Convenience snippets for some common Rust standard library macros ([#10][]).
+
 ## [0.10.0][] - 2016-10-02
 
 ### Adds
@@ -138,6 +143,9 @@ This project adheres to [Semantic Versioning][].
 ### Adds
 - Initial project files.
 
+[Semantic Versioning]: http://semver.org/
+
+[0.11.0]: https://github.com/miqid/atom-language-rust/compare/0.10.0...0.11.0
 [0.10.0]: https://github.com/miqid/atom-language-rust/compare/0.9.0...0.10.0
 [0.9.0]: https://github.com/miqid/atom-language-rust/compare/0.8.1...0.9.0
 [0.8.1]: https://github.com/miqid/atom-language-rust/compare/0.8.0...0.8.1
@@ -148,7 +156,6 @@ This project adheres to [Semantic Versioning][].
 [0.4.0]: https://github.com/miqid/atom-language-rust/compare/0.3.0...0.4.0
 [0.3.0]: https://github.com/miqid/atom-language-rust/compare/0.2.0...0.3.0
 [0.2.0]: https://github.com/miqid/atom-language-rust/compare/0.1.0...0.2.0
-[Semantic Versioning]: http://semver.org/
 
 [#8]: https://github.com/miqid/atom-language-rust/issues/8
 [#7]: https://github.com/miqid/atom-language-rust/issues/7
@@ -156,4 +163,5 @@ This project adheres to [Semantic Versioning][].
 [#3]: https://github.com/miqid/atom-language-rust/issues/3
 [#1]: https://github.com/miqid/atom-language-rust/issues/1
 
+[#10]: https://github.com/miqid/atom-language-rust/pull/10
 [#9]: https://github.com/miqid/atom-language-rust/pull/9

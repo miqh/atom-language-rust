@@ -484,6 +484,9 @@
               "include": "#function-parameters"
             },
             {
+              "include": "#implementation-traits"
+            },
+            {
               "include": "#definitions-common"
             }
           ]
@@ -506,6 +509,9 @@
             },
             {
               "include": "#function-parameters"
+            },
+            {
+              "include": "#implementation-traits"
             },
             {
               "include": "#definitions-common"
@@ -632,6 +638,11 @@
           ]
         }
       ]
+    },
+    "implementation-traits": {
+      "comment": "conservative form of abstract return types (RFC 1522)",
+      "name": "keyword.other.rust",
+      "match": "\\bimpl\\b"
     },
     "keyword-as": {
       "comment": "casts and use statement aliases",

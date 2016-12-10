@@ -29,8 +29,9 @@
       ]
     },
     "bindings": {
+      "comment": "default is part of specialization (RFC 1210)",
       "name": "keyword.other.binding.rust",
-      "match": "\\b(?:let|ref|mut|const|static)\\b"
+      "match": "\\b(?:let|ref|mut|const|static|default)\\b"
     },
     "booleans": {
       "name": "constant.language.boolean.rust",

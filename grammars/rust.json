@@ -1332,7 +1332,7 @@
       "patterns" : [
         {
           "name": "storage.type.primitive.rust",
-          "match": "\\b(?<!:)(?:[iu](?:8|16|32|64|size)|f(?:32|64)|char|str|bool)(?!:)\\b"
+          "match": "\\b(?<!:)(?:[iu](?:8|16|32|64|128|size)|f(?:32|64)|char|str|bool)(?!:)\\b"
         },
         {
           "name": "variable.language.self.rust",

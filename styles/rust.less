@@ -37,37 +37,37 @@
   color: mix(spin((#fff - @color), 180), @syntax-background-color, @weight);
 }
 
-atom-text-editor::shadow .source.rust {
+.syntax--source.syntax--rust {
 
-  .attribute {
+  .syntax--attribute {
     color: @syntax-color-attribute;
-    .string {
+    .syntax--string {
       .blend-text(@syntax-color-attribute, 60%);
     }
   }
 
-  .documentation {
+  .syntax--documentation {
     color: @syntax-color-documentation;
     font-style: normal;
     font-weight: normal;
   }
 
-  .lifetime {
+  .syntax--lifetime {
     color: @syntax-color-lifetime;
   }
 
-  .macro {
+  .syntax--macro {
     color: @syntax-color-macro;
   }
 
-  .markup {
+  .syntax--markup {
     color: inherit;
     font-style: inherit;
     font-weight: inherit;
-    &.bold {
+    &.syntax--bold {
       font-weight: bold;
     }
-    &.definition {
+    &.syntax--definition {
       .blend-text(@syntax-color-documentation, 60%);
       @bg-color: mix(
         @syntax-color-documentation, @syntax-background-color, 14%
@@ -76,45 +76,45 @@ atom-text-editor::shadow .source.rust {
       border: 1px solid @bg-color;
       border-radius: 1px;
     }
-    &.heading {
+    &.syntax--heading {
       .invert-text(@syntax-color-documentation, 87%);
       font-weight: bold;
     }
-    &.italic {
+    &.syntax--italic {
       font-style: italic;
     }
-    &.link-text {
+    &.syntax--link-text {
       .invert-text(@syntax-color-documentation, 72%);
     }
-    &.link-url {
+    &.syntax--link-url {
       .blend-text(@syntax-color-documentation, 60%);
       text-decoration: underline;
     }
-    &.quote {
+    &.syntax--quote {
       .blend-text(@syntax-color-documentation, 60%);
       font-style: italic;
     }
-    &.strikethrough {
+    &.syntax--strikethrough {
       .blend-text(@syntax-color-documentation, 55%);
       text-decoration: line-through;
     }
-    &.raw {
+    &.syntax--raw {
       .invert-text(@syntax-color-documentation, 92%);
     }
-    &.symbol {
+    &.syntax--symbol {
       .invert-text(@syntax-color-documentation, 78%);
       font-weight: bold;
     }
   }
 
-  .parameter {
+  .syntax--parameter {
     color: @syntax-color-parameter;
   }
 
   /* The token class is a only a placeholder for setting the default color */
-  .operator,
-  .symbol,
-  .token {
+  .syntax--operator,
+  .syntax--symbol,
+  .syntax--token {
     color: @syntax-color-token;
   }
 

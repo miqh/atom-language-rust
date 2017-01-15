@@ -31,7 +31,7 @@
     "bindings": {
       "comment": "default is part of specialization (RFC 1210)",
       "name": "keyword.other.binding.rust",
-      "match": "\\b(?:let|ref|mut|const|static|default)\\b"
+      "match": "\\b(?:ref|mut|const|static|default)\\b"
     },
     "booleans": {
       "name": "constant.language.boolean.rust",
@@ -454,7 +454,7 @@
     },
     "flow": {
       "name": "keyword.control.rust",
-      "match": "\\b(?:for|loop|while(?:\\s+let\\s+)?|break|continue|if(?:\\s+let\\s+)?|else|in|return)\\b"
+      "match": "\\b(?:for|loop|while|break|continue|if|else|in|return)\\b"
     },
     "functions": {
       "name": "meta.function.rust",
@@ -649,6 +649,36 @@
       "comment": "casts and use statement aliases",
       "name": "keyword.other.rust",
       "match": "\\bas\\b"
+    },
+    "keyword-let": {
+      "comment": "name and pattern variable bindings",
+      "begin": "\\b(let)\\b",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.other.rust"
+        }
+      },
+      "end": "(?=\\s*[=:;])",
+      "patterns": [
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#modifiers"
+        },
+        {
+          "include": "#metavariables"
+        },
+        {
+          "include": "#literals"
+        },
+        {
+          "include": "#types"
+        },
+        {
+          "include": "#tokens"
+        }
+      ]
     },
     "keyword-where": {
       "begin": "\\b(where)\\b",
@@ -1459,6 +1489,9 @@
     },
     {
       "include": "#keyword-as"
+    },
+    {
+      "include": "#keyword-let"
     },
     {
       "include": "#enumerations"

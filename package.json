@@ -20,6 +20,7 @@
     "atom": ">=1.13.0 <2.0.0"
   },
   "devDependencies": {
+    "dedent-js": "^1.0.1",
     "eslint": "^2.2.0"
   }
 }

@@ -1,5 +1,7 @@
 'use babel';
 
+import dedent from 'dedent-js';
+
 describe('atom-language-rust', () => {
 
   let grammar = null;
@@ -406,6 +408,57 @@ describe('atom-language-rust', () => {
           'keyword.other.rust'
         ],
         value: 'where'
+      });
+    });
+  });
+
+  describe('when tokenizing untagged unions', () => {
+    const unionKeywordToken = {
+      scopes: [
+        'source.rust',
+        'meta.union.rust',
+        'storage.type.rust'
+      ],
+      value: 'union'
+    };
+    it('should only detect single line declarations', () => {
+      let tokens = grammar.tokenizeLines(dedent`
+        union Foo {}
+      `);
+      expect(tokens[0][0]).toEqual(unionKeywordToken);
+      expect(tokens[0][2]).toEqual({
+        scopes: [
+          'source.rust',
+          'meta.union.rust',
+          'entity.name.type.union.rust'
+        ],
+        value: 'Foo'
+      });
+    });
+    describe('for backward compatibility', () => {
+      it('should not detect variable binding usages', () => {
+        let tokens = grammar.tokenizeLines(dedent`
+          let union = true;
+        `);
+        expect(tokens[0][1]).not.toEqual(unionKeywordToken);
+      });
+      it('should not detect name usages', () => {
+        let tokens = grammar.tokenizeLines(dedent`
+          union;
+          union as u32;
+          union();
+        `);
+        expect(tokens[0][0]).not.toEqual(unionKeywordToken);
+        expect(tokens[1][0]).not.toEqual(unionKeywordToken);
+        expect(tokens[2][0]).not.toEqual(unionKeywordToken);
+      });
+      it('should not detect names of other declarations', () => {
+        let tokens = grammar.tokenizeLines(dedent`
+          fn union() {}
+          struct union {}
+        `);
+        expect(tokens[0][2]).not.toEqual(unionKeywordToken);
+        expect(tokens[1][2]).not.toEqual(unionKeywordToken);
       });
     });
   });

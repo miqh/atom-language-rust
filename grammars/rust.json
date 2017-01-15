@@ -652,7 +652,7 @@
     },
     "keyword-let": {
       "comment": "name and pattern variable bindings",
-      "begin": "\\b(let)\\b",
+      "begin": "\\b(let)\\s+",
       "beginCaptures": {
         "1": {
           "name": "keyword.other.rust"

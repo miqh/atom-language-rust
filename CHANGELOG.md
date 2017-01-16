@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning][].
 
+## [0.12.0][] - 2017-01-16
+
+**Important:** Releases from this version forward will no longer be compatible
+               with Atom before 1.13 due to a core application change that
+               affects the package ecosystem.
+
+### Adds
+- Match rule for conservative forms of abstract return types (i.e. impl Trait).
+- Match rule for `default impl`, part of specialisation support.
+- Match rule for untagged unions.
+
+### Changes
+- Numeric literal match rule to also support 128-bit integers.
+- Matching for `let` keyword usages to be aggregated into a new rule.
+
+### Removes
+- Shadow DOM selectors in the package stylesheet ([#11][]).
+
 ## [0.11.0][] - 2016-11-01
 
 ### Adds
@@ -145,6 +163,7 @@ This project adheres to [Semantic Versioning][].
 
 [Semantic Versioning]: http://semver.org/
 
+[0.12.0]: https://github.com/miqid/atom-language-rust/compare/0.11.0...0.12.0
 [0.11.0]: https://github.com/miqid/atom-language-rust/compare/0.10.0...0.11.0
 [0.10.0]: https://github.com/miqid/atom-language-rust/compare/0.9.0...0.10.0
 [0.9.0]: https://github.com/miqid/atom-language-rust/compare/0.8.1...0.9.0
@@ -157,6 +176,7 @@ This project adheres to [Semantic Versioning][].
 [0.3.0]: https://github.com/miqid/atom-language-rust/compare/0.2.0...0.3.0
 [0.2.0]: https://github.com/miqid/atom-language-rust/compare/0.1.0...0.2.0
 
+[#11]: https://github.com/miqid/atom-language-rust/issues/11
 [#8]: https://github.com/miqid/atom-language-rust/issues/8
 [#7]: https://github.com/miqid/atom-language-rust/issues/7
 [#6]: https://github.com/miqid/atom-language-rust/issues/6

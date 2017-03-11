@@ -779,7 +779,7 @@
       "comment": "macro definition",
       "name": "meta.macro.rust",
       "begin": "\\b(macro_rules!)\\s+",
-      "end": "(?=\\s*[{;])",
+      "end": "(?=\\s*[({;])",
       "captures": {
         "1": {
           "name": "support.other.macro.rust"
@@ -792,7 +792,7 @@
         {
           "comment": "unsemantic scope but provides consistency",
           "name": "entity.name.function.rust",
-          "match": "\\b(\\w+)(?=[\\s{])"
+          "match": "\\b(\\w+)(?=[\\s({])"
         }
       ]
     },

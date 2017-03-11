@@ -323,6 +323,52 @@ describe('atom-language-rust', () => {
     });
   });
 
+  describe('when tokenizing macro definitions', () => {
+    it('should detect the name of those using brackets', () => {
+      let tokens = grammar.tokenizeLines(
+        'macro_rules! ok(($expr:expr) => ($expr.unwrap()));'
+      );
+      expect(tokens[0][0]).toEqual({
+        scopes: [
+          'source.rust',
+          'meta.macro.rust',
+          'support.other.macro.rust'
+        ],
+        value: 'macro_rules!'
+      });
+      expect(tokens[0][2]).toEqual({
+        scopes: [
+          'source.rust',
+          'meta.macro.rust',
+          'entity.name.function.rust'
+        ],
+        value: 'ok'
+      });
+    });
+    it('should detect the name of those using curly braces', () => {
+      let tokens = grammar.tokenizeLines(dedent`
+        macro_rules! ok {
+          ($expr:expr) => ($expr.unwrap()));
+        }`);
+      expect(tokens[0][0]).toEqual({
+        scopes: [
+          'source.rust',
+          'meta.macro.rust',
+          'support.other.macro.rust'
+        ],
+        value: 'macro_rules!'
+      });
+      expect(tokens[0][2]).toEqual({
+        scopes: [
+          'source.rust',
+          'meta.macro.rust',
+          'entity.name.function.rust'
+        ],
+        value: 'ok'
+      });
+    });
+  });
+
   describe('when tokenizing macro invocations', () => {
     it('should not detect keywords part of expressions', () => {
       let tokens = grammar.tokenizeLines(

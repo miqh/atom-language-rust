@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning][].
 
+## [0.12.1][] - 2017-03-11
+
+### Fixes
+- Matching for macro definitions where the body is enclosed with brackets
+  ([#12][]).
+
 ## [0.12.0][] - 2017-01-16
 
 **Important:** Releases from this version forward will no longer be compatible
@@ -163,6 +169,7 @@ This project adheres to [Semantic Versioning][].
 
 [Semantic Versioning]: http://semver.org/
 
+[0.12.1]: https://github.com/miqid/atom-language-rust/compare/0.12.0...0.12.1
 [0.12.0]: https://github.com/miqid/atom-language-rust/compare/0.11.0...0.12.0
 [0.11.0]: https://github.com/miqid/atom-language-rust/compare/0.10.0...0.11.0
 [0.10.0]: https://github.com/miqid/atom-language-rust/compare/0.9.0...0.10.0
@@ -176,6 +183,7 @@ This project adheres to [Semantic Versioning][].
 [0.3.0]: https://github.com/miqid/atom-language-rust/compare/0.2.0...0.3.0
 [0.2.0]: https://github.com/miqid/atom-language-rust/compare/0.1.0...0.2.0
 
+[#12]: https://github.com/miqid/atom-language-rust/issues/12
 [#11]: https://github.com/miqid/atom-language-rust/issues/11
 [#8]: https://github.com/miqid/atom-language-rust/issues/8
 [#7]: https://github.com/miqid/atom-language-rust/issues/7

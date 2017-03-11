@@ -8,3 +8,9 @@ notifications:
     rooms:
       secure: rllOGWIuJQUz6SUZxgsSbyP4VGMfmOXNq25k2CnrUeN+J6Q2S+2ahxUGYZpzQ6bw8BzfMTs5DCAYFywHx312e9GWDUVOdinwhLF0IS84S6n9WjsvBOEuov3XHfGFmPj+KQe1N8nX/Xx9xyn+dqKCsE2paLLmTQWq6Fe51hGgNk6iQ9DED3Ft8VuEwPZ/Z/yquTJrdD3lz7XmoCsO+P5U6l3AxFkNVgLhprK57rnYAYZHKheWXA1WTV07avrjxKsYaSVVJrgWchpt0kMBi51rRJRm7+laO4xyxhxR8+FiWKHsf/BeuQZXpvhjGDLsfrv4El+AYhAhRmA2iJ0k3tGadZWK3/c7I0WitAgceckZ2UsyYHvnz7zMtfHZ/5ANO0TkGdjhrekQVlAoRXfWjh4070KMlLWZrRLvyEH4TQra/TvDDdt9BBv+gYQ9r0lHIqfuE4m5B7Bai4k+wZ9GcjjuNe6tPA3UrIOvZ+/L4a47POW7jRLru+zZSRb+J5xewI2uUD21DUH6e9PcdG57ogZOZLitvaTxvRGRNIaQyJKX/RFCcrVshG79j0XBSqaOjpt+547iByHZLVUFOTFGznNZh5Ce9wnH7rg+M42s5NvTI0bgJVy+VA3bo6Xrhk1IauhiZKvn3HDdAUoABeuSkrZPgYFJSasktBl+PGiQbsqSWX0=
     on_start: never
+
+# Will also affect tags
+branches:
+  except:
+    # Skip building tagged releases
+    - /^[0-9]+\.[0-9]+\.[0-9]+$/

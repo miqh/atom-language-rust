@@ -66,7 +66,7 @@ See [CONTRIBUTING].
 - [Why are the styles set through this package not taking effect?][Q2]
 - [Why does this grammar package even offer styling?][Q3]
 
-[Q1]: #why-is-not-given-a-grammar-scope-for-styling
+[Q1]: #why-is--not-given-a-grammar-scope-for-styling
 [Q2]: #why-are-the-styles-set-through-this-package-not-taking-effect
 [Q3]: #why-does-this-grammar-package-even-offer-styling
 

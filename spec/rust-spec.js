@@ -389,6 +389,15 @@ describe('atom-language-rust', () => {
         value: 'match'
       });
     });
+    it('should terminate named function argument usages', () => {
+      let tokens = grammar.tokenizeLines(
+        'smart_macro!{ fn foo() -> bool }'
+      );
+      expect(tokens[0][13]).toEqual({
+        scopes: ['source.rust', 'punctuation.symbol.rust'],
+        value: '}'
+      });
+    });
   });
 
   describe('when tokenizing primitive casts', () => {

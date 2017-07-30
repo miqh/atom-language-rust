@@ -510,7 +510,7 @@
               "name": "entity.name.function.rust"
             }
           },
-          "end": "(?=\\s*[{;])",
+          "end": "(?=\\s*[{;,}])",
           "patterns": [
             {
               "include": "#comments"

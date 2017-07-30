@@ -207,17 +207,13 @@
     "comment-lines": {
       "patterns": [
         {
+          "comment": "prevent end match consuming non-comment lines to avoid breaking folds",
           "name": "comment.line.documentation.rust",
-          "begin": "(?=//(?:!|/(?!/)))",
-          "beginCaptures": {
-            "1": {
-              "name": "markup.definition.rust"
-            }
-          },
-          "end": "(?m)^(?!\\s*//[/!])",
+          "begin": "(?=^\\s*//(?:!|/(?!/)))",
+          "end": "(?!^\\s*//(?:!|/(?!/)))",
           "patterns": [
             {
-              "match": "(?m)^\\s*(//[/!])\\s*(#.+)",
+              "match": "^\\s*(//[/!])\\s*(#.+)",
               "captures": {
                 "1": {
                   "name": "markup.definition.rust"
@@ -234,7 +230,7 @@
             },
             {
               "name": "markup.list.unnumbered.rust",
-              "match": "(?m)^\\s*(//[/!])\\s*([*+\\-])(?=\\s)(.*)",
+              "match": "^\\s*(//[/!])\\s*([*+\\-])(?=\\s)(.*)$",
               "captures": {
                 "1": {
                   "name": "markup.definition.rust"
@@ -253,7 +249,7 @@
             },
             {
               "name": "markup.list.numbered.rust",
-              "match": "(?m)^\\s*(//[/!])\\s*(\\d+\\.)(?=\\s)(.*)",
+              "match": "^\\s*(//[/!])\\s*(\\d+\\.)(?=\\s)(.*)$",
               "captures": {
                 "1": {
                   "name": "markup.definition.rust"
@@ -271,7 +267,7 @@
               }
             },
             {
-              "match": "(?m)^\\s*(//[/!])\\s*(>)(.*)",
+              "match": "^\\s*(//[/!])\\s*(>)(.*)$",
               "captures": {
                 "1": {
                   "name": "markup.definition.rust"
@@ -285,9 +281,9 @@
               }
             },
             {
-              "comment": "unterminated raw blocks must not leak",
-              "begin": "(?m)^\\s*(//[/!])\\s*(```)(.*)",
-              "end": "(```)|(?m)^(?!\\s*//[/!])",
+              "comment": "unterminated raw blocks will break code folding",
+              "begin": "^\\s*(//[/!])\\s*(```)((?:(?!```).)*)",
+              "end": "(?:(```)(.*))|(?=^\\s*(?!//(?:!|/(?!/))))",
               "beginCaptures": {
                 "1": {
                   "name": "markup.definition.rust"
@@ -302,11 +298,24 @@
               "endCaptures": {
                 "1": {
                   "name": "markup.symbol.rust"
+                },
+                "2": {
+                  "comment": "captured remainder will not match against any newline-based rules",
+                  "name": "comment.line.documentation.rust",
+                  "patterns": [
+                    {
+                      "include": "#markdown-inline"
+                    }
+                  ]
+                },
+                "3": {
+                  "name": "illegal.invalid.rust"
                 }
               },
               "patterns": [
                 {
-                  "match": "(?m)^\\s*(//[/!])\\s*((?:[^`]+|`(?!``))*)",
+                  "comment": "do not consume raw block delimiter here",
+                  "match": "^\\s*(//(?:!|/(?!/)))((?:(?!```).)*)",
                   "captures": {
                     "1": {
                       "name": "markup.definition.rust"
@@ -319,7 +328,8 @@
               ]
             },
             {
-              "match": "(//[/!])\\s*(.+)?",
+              "comment": "mimic strict annotation check of parent rule",
+              "match": "^\\s*(//(?:!|/(?!/)))(.*)$",
               "captures": {
                 "1": {
                   "name": "markup.definition.rust"

@@ -15,7 +15,14 @@
 @syntax-color-lifetime: mix(@syntax-text-color, #e7007d, 50%);
 @syntax-color-macro: mix(@syntax-text-color, #00f0ff, 50%);
 @syntax-color-parameter: mix(@syntax-text-color, #2255bb, 50%);
-@syntax-color-token: inherit;
+
+.define-token-color() when (lightness(@syntax-background-color) > 50%) {
+  @syntax-color-token: lighten(@syntax-text-color, 12%);
+}
+.define-token-color() when (lightness(@syntax-background-color) <= 50%) {
+  @syntax-color-token: darken(@syntax-text-color, 12%);
+}
+.define-token-color();
 
 /**
  * Blends text with respect to the main background color.

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning][].
 
+## [0.12.2][] - 2017-07-30
+
+### Fixes
+- Line-based documentation blocks (`///`) possibly interfering with code
+  folding alignment ([#14][]).
+
+### Changes
+- Matching for named function definitions so that they terminate properly
+  in unusual use cases, such as arguments to macro invocations.
+- Default colour derivation for tokens to be based on the primary text
+  and background colours.
+
 ## [0.12.1][] - 2017-03-11
 
 ### Fixes
@@ -169,6 +181,7 @@ This project adheres to [Semantic Versioning][].
 
 [Semantic Versioning]: http://semver.org/
 
+[0.12.2]: https://github.com/miqid/atom-language-rust/compare/0.12.1...0.12.2
 [0.12.1]: https://github.com/miqid/atom-language-rust/compare/0.12.0...0.12.1
 [0.12.0]: https://github.com/miqid/atom-language-rust/compare/0.11.0...0.12.0
 [0.11.0]: https://github.com/miqid/atom-language-rust/compare/0.10.0...0.11.0
@@ -183,6 +196,7 @@ This project adheres to [Semantic Versioning][].
 [0.3.0]: https://github.com/miqid/atom-language-rust/compare/0.2.0...0.3.0
 [0.2.0]: https://github.com/miqid/atom-language-rust/compare/0.1.0...0.2.0
 
+[#14]: https://github.com/miqid/atom-language-rust/issues/14
 [#12]: https://github.com/miqid/atom-language-rust/issues/12
 [#11]: https://github.com/miqid/atom-language-rust/issues/11
 [#8]: https://github.com/miqid/atom-language-rust/issues/8

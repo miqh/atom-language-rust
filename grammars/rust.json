@@ -283,7 +283,7 @@
             {
               "comment": "unterminated raw blocks will break code folding",
               "begin": "^\\s*(//[/!])\\s*(```)((?:(?!```).)*)",
-              "end": "(?:(```)(.*))|(?=^\\s*(?!//(?:!|/(?!/))))",
+              "end": "(?:(```)(.*))|(?=^)(?!^\\s*//[/!])",
               "beginCaptures": {
                 "1": {
                   "name": "markup.definition.rust"

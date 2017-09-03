@@ -2,7 +2,7 @@
   ".source.rust": {
     "editor": {
       "autoIndentOnPaste": true,
-      "commentStart": "//",
+      "commentStart": "// ",
       "decreaseIndentPattern": "^\\s*[})\\]][;\\s]*$",
       "foldEndPattern": "^\\s*\\}",
       "increaseIndentPattern": "^.*(?:\\{[^}'\"]*|\\([^)'\"]*|\\[[^\\]'\"]*)$",

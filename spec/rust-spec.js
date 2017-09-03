@@ -528,7 +528,7 @@ describe('atom-language-rust', () => {
       // Position cursor before the 'this' word
       editor.getLastCursor().setBufferPosition([0, 9]);
       editor.toggleLineCommentsInSelection();
-      expect(buffer.getText()).toEqual('//comment this out');
+      expect(buffer.getText()).toEqual('// comment this out');
       editor.toggleLineCommentsInSelection();
       expect(buffer.getText()).toEqual(text);
     });
@@ -544,7 +544,7 @@ describe('atom-language-rust', () => {
       editor.setSelectedBufferRange([[0, 9], [2, 9]]);
       editor.toggleLineCommentsInSelection();
       expect(buffer.getText()).toEqual(
-        '//comment this out\n//comment this out\n//comment this out'
+        '// comment this out\n// comment this out\n// comment this out'
       );
       editor.toggleLineCommentsInSelection();
       expect(buffer.getText()).toEqual(text);

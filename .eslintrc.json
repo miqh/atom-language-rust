@@ -1,6 +1,7 @@
 {
   "env": {
     "atomtest": true,
+    "browser": true,
     "es6": true,
     "jasmine": true
   },
@@ -9,7 +10,7 @@
     "atom": false
   },
   "parserOptions": {
-    "ecmaVersion": 6,
+    "ecmaVersion": 8,
     "sourceType": "module"
   },
   "rules": {

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning][].
 
+## [0.12.3][] - 2017-09-25
+
+### Fixes
+- Eager match termination of indented line-based documentation blocks
+  containing fenced code blocks. 
+- Custom colour for tokens not being applied on dark backgrounds themes.
+- Default custom colour placeholder values not appearing in package settings.
+
+### Changes
+- Toggling line comments to include an extra space after the comment marker.
+  For example, `panic!()` toggles to `// panic!()` not `//panic!()`. ([#15][])
+
 ## [0.12.2][] - 2017-07-30
 
 ### Fixes
@@ -181,6 +193,7 @@ This project adheres to [Semantic Versioning][].
 
 [Semantic Versioning]: http://semver.org/
 
+[0.12.3]: https://github.com/miqid/atom-language-rust/compare/0.12.2...0.12.3
 [0.12.2]: https://github.com/miqid/atom-language-rust/compare/0.12.1...0.12.2
 [0.12.1]: https://github.com/miqid/atom-language-rust/compare/0.12.0...0.12.1
 [0.12.0]: https://github.com/miqid/atom-language-rust/compare/0.11.0...0.12.0
@@ -196,6 +209,7 @@ This project adheres to [Semantic Versioning][].
 [0.3.0]: https://github.com/miqid/atom-language-rust/compare/0.2.0...0.3.0
 [0.2.0]: https://github.com/miqid/atom-language-rust/compare/0.1.0...0.2.0
 
+[#15]: https://github.com/miqid/atom-language-rust/issues/15
 [#14]: https://github.com/miqid/atom-language-rust/issues/14
 [#12]: https://github.com/miqid/atom-language-rust/issues/12
 [#11]: https://github.com/miqid/atom-language-rust/issues/11

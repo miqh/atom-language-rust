@@ -1,4 +1,4 @@
-'use babel';
+/** @babel */
 
 import dedent from 'dedent-js';
 

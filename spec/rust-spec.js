@@ -323,6 +323,36 @@ describe('atom-language-rust', () => {
     });
   });
 
+  describe('when tokenizing impl trait usage', () => {
+    it('should detect impl keywords in argument position', () => {
+      let tokens = grammar.tokenizeLines(
+        'fn foo(x: impl Foo) {}'
+      );
+      expect(tokens[0][7]).toEqual({
+        scopes: [
+          'source.rust',
+          'meta.function.rust',
+          'meta.function-parameters.rust',
+          'keyword.other.rust'
+        ],
+        value: 'impl'
+      });
+    });
+    it('should detect impl keywords in return position', () => {
+      let tokens = grammar.tokenizeLines(
+        'fn foo() -> impl Foo {}'
+      );
+      expect(tokens[0][8]).toEqual({
+        scopes: [
+          'source.rust',
+          'meta.function.rust',
+          'keyword.other.rust'
+        ],
+        value: 'impl'
+      });
+    });
+  });
+
   describe('when tokenizing macro definitions', () => {
     it('should detect the name of those using brackets', () => {
       let tokens = grammar.tokenizeLines(
@@ -446,6 +476,72 @@ describe('atom-language-rust', () => {
           'keyword.other.rust'
         ],
         value: 'as'
+      });
+    });
+  });
+
+  describe('when tokenizing trait aliases', () => {
+    it('should detect simple declarations', () => {
+      let tokens = grammar.tokenizeLines(
+        'trait FooAlias = Foo; '
+      );
+      expect(tokens[0][7]).toEqual({
+        scopes: [
+          'source.rust'
+        ],
+        value: ' '
+      });
+    });
+    it('should detect where clauses on a source trait', () => {
+      let tokens = grammar.tokenizeLines(
+        'trait FooAlias = Foo where Self: Bar;'
+      );
+      expect(tokens[0][6]).toEqual({
+        scopes: [
+          'source.rust',
+          'meta.trait.rust',
+          'keyword.other.rust'
+        ],
+        value: 'where'
+      });
+    });
+    it('should detect where clauses without a source trait', () => {
+      let tokens = grammar.tokenizeLines(
+        'trait FooAlias = where Self: Foo + Bar;'
+      );
+      expect(tokens[0][6]).toEqual({
+        scopes: [
+          'source.rust',
+          'meta.trait.rust',
+          'keyword.other.rust'
+        ],
+        value: 'where'
+      });
+    });
+  });
+
+  describe('when tokenizing trait bounds', () => {
+    it('should detect for keywords defining HRTBs', () => {
+      let tokens = grammar.tokenizeLines(dedent`
+        fn foo<T>(t: T) where T: for<'a> Foo<'a> {}
+        fn foo<T: for<'a> Foo<'a>> {}
+      `);
+      expect(tokens[0][17]).toEqual({
+        scopes: [
+          'source.rust',
+          'meta.function.rust',
+          'keyword.other.rust'
+        ],
+        value: 'for'
+      });
+      expect(tokens[1][7]).toEqual({
+        scopes: [
+          'source.rust',
+          'meta.function.rust',
+          'meta.type-parameters.rust',
+          'keyword.other.rust'
+        ],
+        value: 'for'
       });
     });
   });

@@ -29,9 +29,9 @@
       ]
     },
     "bindings": {
-      "comment": "default is part of specialization (RFC 1210)",
+      "comment": "impl specialization (RFC 1210), dyn traits (RFC 2113)",
       "name": "keyword.other.binding.rust",
-      "match": "\\b(?:ref|mut|const|static|default)\\b"
+      "match": "\\b(?:ref|mut|const|static|default|dyn)\\b"
     },
     "booleans": {
       "name": "constant.language.boolean.rust",
@@ -420,6 +420,16 @@
         },
         {
           "include": "#types"
+        },
+        {
+          "comment": "higher-rank trait bounds (RFC 1598)",
+          "name": "keyword.other.rust",
+          "match": "\\bfor\\b"
+        },
+        {
+          "comment": "impl trait as argument (RFC 1951)",
+          "name": "keyword.other.rust",
+          "match": "\\bimpl\\b"
         }
       ]
     },
@@ -1329,7 +1339,7 @@
           "name": "storage.type.rust"
         }
       },
-      "end": "(?=\\s*\\{)",
+      "end": "(?=\\s*[\\{;])",
       "patterns": [
         {
           "include": "#comments"
@@ -1341,13 +1351,14 @@
           "include": "#metavariables"
         },
         {
+          "comment": "terminate early for trait aliases (RFC 1733)",
           "begin": "(?:\\b(\\w+)|\\[.*\\])(?=[\\s<{/]|:(?!:))",
           "beginCaptures": {
             "1": {
               "name": "entity.name.type.trait.rust"
             }
           },
-          "end": "(?=\\s*\\{)",
+          "end": "(?=\\s*[\\{;])",
           "patterns": [
             {
               "include": "#comments"

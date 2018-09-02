@@ -715,6 +715,14 @@
         }
       ]
     },
+    "keyword-self": {
+      "name": "variable.language.self.rust",
+      "match": "\\b[sS]elf\\b"
+    },
+    "keyword-super": {
+      "name": "variable.language.super.rust",
+      "match": "\\bsuper\\b"
+    },
     "keyword-where": {
       "begin": "\\b(where)\\b",
       "end": "(?=\\s*[{;])",
@@ -751,10 +759,6 @@
           "match": "\\b(?:crate|extern|pub)\\b"
         },
         {
-          "name": "variable.language.super.rust",
-          "match": "\\bsuper\\b"
-        },
-        {
           "comment": "module declarations and definitions",
           "begin": "\\b(mod)\\b",
           "end": "[;{]",
@@ -786,6 +790,12 @@
               "include": "#keyword-as"
             },
             {
+              "include": "#keyword-self"
+            },
+            {
+              "include": "#keyword-super"
+            },
+            {
               "include": "#symbols"
             },
             {
@@ -794,6 +804,9 @@
               "match": "\\*"
             }
           ]
+        },
+        {
+          "include": "#keyword-super"
         }
       ]
     },
@@ -1404,12 +1417,11 @@
           "match": "\\b(?<!:)(?:[iu](?:8|16|32|64|128|size)|f(?:32|64)|char|str|bool)(?!:)\\b"
         },
         {
-          "name": "variable.language.self.rust",
-          "match": "\\b[sS]elf\\b"
-        },
-        {
           "name": "storage.type.rust",
           "match": "\\btype\\b"
+        },
+        {
+          "include": "#keyword-self"
         }
       ]
     },

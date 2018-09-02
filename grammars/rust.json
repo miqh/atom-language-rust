@@ -31,9 +31,9 @@
     "bindings": {
       "patterns": [
         {
-          "comment": "impl specialization (RFC 1210)",
+          "comment": "impl specialization (RFC 1210), async (RFC 2394), existential types (RFC 2071)",
           "name": "keyword.other.binding.rust",
-          "match": "\\b(?:ref|mut|const|static|default)\\b"
+          "match": "\\b(?:ref|mut|const|static|default|async|existential)\\b"
         },
         {
           "include": "#keyword-dyn"
@@ -480,8 +480,9 @@
       ]
     },
     "flow": {
+      "comment": "try {} (RFC 2388)",
       "name": "keyword.control.rust",
-      "match": "\\b(?:for|loop|while|break|continue|if|else|in|return)\\b"
+      "match": "\\b(?:for|loop|while|break|continue|if|else|in|return|try)\\b"
     },
     "functions": {
       "name": "meta.function.rust",
@@ -1112,6 +1113,11 @@
         }
       ]
     },
+    "raw-identifiers": {
+      "comment": "raw identifiers (RFC 2151)",
+      "name": "",
+      "match": "r#(\\w+)"
+    },
     "strings": {
       "patterns": [
         {
@@ -1528,6 +1534,9 @@
     },
     {
       "include": "#labels"
+    },
+    {
+      "include": "#raw-identifiers"
     },
     {
       "include": "#attributes"

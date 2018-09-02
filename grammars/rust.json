@@ -29,9 +29,16 @@
       ]
     },
     "bindings": {
-      "comment": "impl specialization (RFC 1210), dyn traits (RFC 2113)",
-      "name": "keyword.other.binding.rust",
-      "match": "\\b(?:ref|mut|const|static|default|dyn)\\b"
+      "patterns": [
+        {
+          "comment": "impl specialization (RFC 1210)",
+          "name": "keyword.other.binding.rust",
+          "match": "\\b(?:ref|mut|const|static|default)\\b"
+        },
+        {
+          "include": "#keyword-dyn"
+        }
+      ]
     },
     "booleans": {
       "name": "constant.language.boolean.rust",
@@ -580,7 +587,7 @@
           "name": "keyword.other.rust"
         }
       },
-      "end": "(?=\\s*\\{)",
+      "end": "(?=\\s*[{};])",
       "patterns": [
         {
           "include": "#comments"
@@ -633,7 +640,7 @@
         },
         {
           "begin": "\\b(?=\\w)",
-          "end": "(?=\\s*(?:<|\\]|\\{|for|where))",
+          "end": "(?=\\s*(?:<|\\]|\\{|\\}|for|where|;))",
           "patterns": [
             {
               "include": "#comments"
@@ -643,6 +650,9 @@
             },
             {
               "include": "#metavariables"
+            },
+            {
+              "include": "#keyword-dyn"
             },
             {
               "include": "#tokens"
@@ -669,6 +679,11 @@
       "comment": "casts and use statement aliases",
       "name": "keyword.other.rust",
       "match": "\\bas\\b"
+    },
+    "keyword-dyn": {
+      "comment": "dyn trait syntax (RFC 2113)",
+      "name": "keyword.other.rust",
+      "match": "\\bdyn\\b"
     },
     "keyword-let": {
       "comment": "name and pattern variable bindings",
@@ -987,6 +1002,9 @@
           "comment": "RFC #469: feature gated",
           "name": "storage.modifier.rust",
           "match": "\\bbox\\b"
+        },
+        {
+          "include": "#keyword-dyn"
         }
       ]
     },

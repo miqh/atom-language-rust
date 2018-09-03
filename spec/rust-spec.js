@@ -323,6 +323,36 @@ describe('atom-language-rust', () => {
     });
   });
 
+  describe('when tokenizing dyn trait usage', () => {
+    it('should detect dyn keyword in argument position', () => {
+      let tokens = grammar.tokenizeLines(dedent`
+        fn foo(x: &dyn Foo) {}
+      `);
+      expect(tokens[0][8]).toEqual({
+        scopes: [
+          'source.rust',
+          'meta.function.rust',
+          'meta.function-parameters.rust',
+          'keyword.other.rust'
+        ],
+        value: 'dyn'
+      });
+    });
+    it('should detect dyn keyword in return position', () => {
+      let tokens = grammar.tokenizeLines(dedent`
+        fn foo() -> &dyn Foo {}
+      `);
+      expect(tokens[0][9]).toEqual({
+        scopes: [
+          'source.rust',
+          'meta.function.rust',
+          'keyword.other.rust'
+        ],
+        value: 'dyn'
+      });
+    });
+  });
+
   describe('when tokenizing impl trait usage', () => {
     it('should detect impl keywords in argument position', () => {
       let tokens = grammar.tokenizeLines(
@@ -476,6 +506,30 @@ describe('atom-language-rust', () => {
           'keyword.other.rust'
         ],
         value: 'as'
+      });
+    });
+    it('should detect the self keyword', () => {
+      let tokens = grammar.tokenizeLines(dedent`
+        use foo::self;
+      `);
+      expect(tokens[0][3]).toEqual({
+        scopes: [
+          'source.rust',
+          'variable.language.self.rust'
+        ],
+        value: 'self'
+      });
+    });
+    it('should detect the super keyword', () => {
+      let tokens = grammar.tokenizeLines(dedent`
+        use foo::super;
+      `);
+      expect(tokens[0][3]).toEqual({
+        scopes: [
+          'source.rust',
+          'variable.language.super.rust'
+        ],
+        value: 'super'
       });
     });
   });

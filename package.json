@@ -1,6 +1,6 @@
 {
   "name": "atom-language-rust",
-  "version": "0.13.0",
+  "version": "0.14.0",
   "description": "Rust language grammar with custom enhancements",
   "author": "Michael Huynh <miqid@outlook.com> (https://github.com/miqid)",
   "keywords": [

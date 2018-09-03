@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning][].
 
+## [0.14.0][] - 2018-09-03
+
+### Adds
+- Match rule for the `async` keyword, part of async and await syntax.
+- Match rule for `existential` declarations, part of named existential types.
+- Match rule for reserved `try` expressions.
+
+### Changes
+- Match termination for unusual `impl` positions to avoid bad match contexts
+  spilling into subsequent lines.
+
+### Fixes
+- Matching of `dyn` traits in several positions.
+- Matching of `self` and `super` in `use` statements.
+
 ## [0.13.0][] - 2017-12-17
 
 ### Adds
@@ -202,6 +217,7 @@ This project adheres to [Semantic Versioning][].
 
 [Semantic Versioning]: http://semver.org/
 
+[0.14.0]: https://github.com/miqid/atom-language-rust/compare/0.13.0...0.14.0
 [0.13.0]: https://github.com/miqid/atom-language-rust/compare/0.12.3...0.13.0
 [0.12.3]: https://github.com/miqid/atom-language-rust/compare/0.12.2...0.12.3
 [0.12.2]: https://github.com/miqid/atom-language-rust/compare/0.12.1...0.12.2

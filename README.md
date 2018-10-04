@@ -121,8 +121,8 @@ the included styles by disabling them via package settings.
 [atom]: https://atom.io/
 [changelog]: CHANGELOG.md
 [contributing]: CONTRIBUTING.md
-[ci]: https://travis-ci.org/miqid/atom-language-rust
-[ci-badge]: https://img.shields.io/travis/miqid/atom-language-rust/master.svg?style=flat-square
+[ci]: https://travis-ci.org/miqh/atom-language-rust
+[ci-badge]: https://img.shields.io/travis/miqh/atom-language-rust/master.svg?style=flat-square
 [first-mate]: https://atom.github.io/first-mate/
 [rust]: https://www.rust-lang.org/
 [rust documentation]: https://doc.rust-lang.org/book/documentation.html

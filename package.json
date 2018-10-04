@@ -2,17 +2,20 @@
   "name": "atom-language-rust",
   "version": "0.14.0",
   "description": "Rust language grammar with custom enhancements",
-  "author": "Michael Huynh <miqid@outlook.com> (https://github.com/miqid)",
+  "author": "Michael Huynh",
   "keywords": [
     "rust",
     "grammar",
     "language",
     "syntax"
   ],
-  "repository": "https://github.com/miqid/atom-language-rust",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/miqh/atom-language-rust.git"
+  },
   "homepage": "https://atom.io/packages/atom-language-rust",
   "bugs": {
-    "url": "https://github.com/miqid/atom-language-rust/issues"
+    "url": "https://github.com/miqh/atom-language-rust/issues"
   },
   "license": "MIT",
   "main": "./index.js",

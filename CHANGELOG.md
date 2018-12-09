@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning][].
 
+## [0.14.1][] - 2018-12-09
+
+Updated [README][] with a notice for Atom users.
+
 ## [0.14.0][] - 2018-09-03
 
 ### Adds
@@ -215,35 +219,37 @@ This project adheres to [Semantic Versioning][].
 ### Adds
 - Initial project files.
 
+[README]: https://github.com/miqh/atom-language-rust/blob/master/README.md
 [Semantic Versioning]: http://semver.org/
 
-[0.14.0]: https://github.com/miqid/atom-language-rust/compare/0.13.0...0.14.0
-[0.13.0]: https://github.com/miqid/atom-language-rust/compare/0.12.3...0.13.0
-[0.12.3]: https://github.com/miqid/atom-language-rust/compare/0.12.2...0.12.3
-[0.12.2]: https://github.com/miqid/atom-language-rust/compare/0.12.1...0.12.2
-[0.12.1]: https://github.com/miqid/atom-language-rust/compare/0.12.0...0.12.1
-[0.12.0]: https://github.com/miqid/atom-language-rust/compare/0.11.0...0.12.0
-[0.11.0]: https://github.com/miqid/atom-language-rust/compare/0.10.0...0.11.0
-[0.10.0]: https://github.com/miqid/atom-language-rust/compare/0.9.0...0.10.0
-[0.9.0]: https://github.com/miqid/atom-language-rust/compare/0.8.1...0.9.0
-[0.8.1]: https://github.com/miqid/atom-language-rust/compare/0.8.0...0.8.1
-[0.8.0]: https://github.com/miqid/atom-language-rust/compare/0.7.0...0.8.0
-[0.7.0]: https://github.com/miqid/atom-language-rust/compare/0.6.0...0.7.0
-[0.6.0]: https://github.com/miqid/atom-language-rust/compare/0.5.0...0.6.0
-[0.5.0]: https://github.com/miqid/atom-language-rust/compare/0.4.0...0.5.0
-[0.4.0]: https://github.com/miqid/atom-language-rust/compare/0.3.0...0.4.0
-[0.3.0]: https://github.com/miqid/atom-language-rust/compare/0.2.0...0.3.0
-[0.2.0]: https://github.com/miqid/atom-language-rust/compare/0.1.0...0.2.0
+[0.14.1]: https://github.com/miqh/atom-language-rust/compare/0.14.0...0.14.1
+[0.14.0]: https://github.com/miqh/atom-language-rust/compare/0.13.0...0.14.0
+[0.13.0]: https://github.com/miqh/atom-language-rust/compare/0.12.3...0.13.0
+[0.12.3]: https://github.com/miqh/atom-language-rust/compare/0.12.2...0.12.3
+[0.12.2]: https://github.com/miqh/atom-language-rust/compare/0.12.1...0.12.2
+[0.12.1]: https://github.com/miqh/atom-language-rust/compare/0.12.0...0.12.1
+[0.12.0]: https://github.com/miqh/atom-language-rust/compare/0.11.0...0.12.0
+[0.11.0]: https://github.com/miqh/atom-language-rust/compare/0.10.0...0.11.0
+[0.10.0]: https://github.com/miqh/atom-language-rust/compare/0.9.0...0.10.0
+[0.9.0]: https://github.com/miqh/atom-language-rust/compare/0.8.1...0.9.0
+[0.8.1]: https://github.com/miqh/atom-language-rust/compare/0.8.0...0.8.1
+[0.8.0]: https://github.com/miqh/atom-language-rust/compare/0.7.0...0.8.0
+[0.7.0]: https://github.com/miqh/atom-language-rust/compare/0.6.0...0.7.0
+[0.6.0]: https://github.com/miqh/atom-language-rust/compare/0.5.0...0.6.0
+[0.5.0]: https://github.com/miqh/atom-language-rust/compare/0.4.0...0.5.0
+[0.4.0]: https://github.com/miqh/atom-language-rust/compare/0.3.0...0.4.0
+[0.3.0]: https://github.com/miqh/atom-language-rust/compare/0.2.0...0.3.0
+[0.2.0]: https://github.com/miqh/atom-language-rust/compare/0.1.0...0.2.0
 
-[#15]: https://github.com/miqid/atom-language-rust/issues/15
-[#14]: https://github.com/miqid/atom-language-rust/issues/14
-[#12]: https://github.com/miqid/atom-language-rust/issues/12
-[#11]: https://github.com/miqid/atom-language-rust/issues/11
-[#8]: https://github.com/miqid/atom-language-rust/issues/8
-[#7]: https://github.com/miqid/atom-language-rust/issues/7
-[#6]: https://github.com/miqid/atom-language-rust/issues/6
-[#3]: https://github.com/miqid/atom-language-rust/issues/3
-[#1]: https://github.com/miqid/atom-language-rust/issues/1
+[#15]: https://github.com/miqh/atom-language-rust/issues/15
+[#14]: https://github.com/miqh/atom-language-rust/issues/14
+[#12]: https://github.com/miqh/atom-language-rust/issues/12
+[#11]: https://github.com/miqh/atom-language-rust/issues/11
+[#8]: https://github.com/miqh/atom-language-rust/issues/8
+[#7]: https://github.com/miqh/atom-language-rust/issues/7
+[#6]: https://github.com/miqh/atom-language-rust/issues/6
+[#3]: https://github.com/miqh/atom-language-rust/issues/3
+[#1]: https://github.com/miqh/atom-language-rust/issues/1
 
-[#10]: https://github.com/miqid/atom-language-rust/pull/10
-[#9]: https://github.com/miqid/atom-language-rust/pull/9
+[#10]: https://github.com/miqh/atom-language-rust/pull/10
+[#9]: https://github.com/miqh/atom-language-rust/pull/9
